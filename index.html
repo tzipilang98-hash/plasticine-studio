@@ -1,0 +1,443 @@
+cat /mnt/user-data/outputs/plasticine-studio.html
+Output
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סטודיו פלסטלינה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800&family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#B8860B;--gold-l:#F5E6C0;--gold-d:#7A5C00;
+  --cream:#FDF8EE;--cream-d:#F0E8D4;
+  --brown:#5C3A1E;--brown-d:#2C1A0A;
+  --text:#2C1A0A;--muted:#7A5C3A;
+  --bdr:rgba(139,101,20,0.2);--bds:rgba(139,101,20,0.4);
+  --r:12px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Heebo',sans-serif;background:var(--cream);color:var(--text);direction:rtl;min-height:100vh}
+.hdr{background:linear-gradient(135deg,#2C1A0A,#5C3A1E,#2C1A0A);padding:1.4rem 2rem;text-align:center;border-bottom:3px solid var(--gold)}
+.hdr h1{font-family:'Frank Ruhl Libre',serif;font-size:2rem;color:var(--gold-l);font-weight:700}
+.hdr p{color:rgba(245,230,192,0.65);font-size:0.85rem;margin-top:0.25rem}
+.api-bar{background:#FFF8E8;border-bottom:1px solid var(--bds);padding:0.75rem 2rem;display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap}
+.api-bar label{font-size:0.82rem;font-weight:700;color:var(--brown-d);white-space:nowrap}
+.api-bar input{flex:1;min-width:280px;padding:0.5rem 0.85rem;font-size:0.85rem;border:1.5px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);outline:none;direction:ltr;font-family:monospace}
+.api-bar input:focus{border-color:var(--gold)}
+.api-status{font-size:0.78rem;padding:0.28rem 0.7rem;border-radius:20px;font-weight:600;white-space:nowrap}
+.api-status.ok{background:#E0F0E0;color:#2A5A2A}
+.api-status.no{background:#FEF0F0;color:#A32D2D}
+.main{max-width:880px;margin:0 auto;padding:1.5rem 1rem}
+.steps{display:flex;border:0.5px solid var(--bdr);border-radius:var(--r);overflow:hidden;background:#fff;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(44,26,10,0.07)}
+.st{flex:1;padding:0.6rem 0.2rem;text-align:center;font-size:0.72rem;font-weight:500;color:var(--muted);border-left:0.5px solid var(--bdr)}
+.st:last-child{border-left:none}
+.st.on{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#fff;font-weight:700}
+.st.done{background:var(--gold-l);color:var(--gold-d)}
+.sn{display:block;font-size:0.92rem;font-weight:700}
+.card{background:#fff;border:0.5px solid var(--bdr);border-radius:var(--r);padding:1.35rem;margin-bottom:1.25rem;box-shadow:0 2px 8px rgba(44,26,10,0.07)}
+.ctit{font-family:'Frank Ruhl Libre',serif;font-size:1.1rem;font-weight:700;color:var(--brown-d);margin-bottom:0.85rem;padding-bottom:0.65rem;border-bottom:2px solid var(--gold-l);display:flex;align-items:center;gap:0.4rem}
+textarea{width:100%;min-height:80px;padding:0.8rem;font-family:'Heebo',sans-serif;font-size:0.9rem;border:1.5px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);resize:vertical;direction:rtl;line-height:1.55;outline:none}
+textarea:focus{border-color:var(--gold)}
+button{font-family:'Heebo',sans-serif;cursor:pointer;border-radius:var(--rs);border:none;transition:all 0.2s;font-size:0.85rem;font-weight:600}
+button:disabled{opacity:0.45;cursor:not-allowed}
+.bp{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#fff;padding:0.58rem 1.2rem;box-shadow:0 2px 8px rgba(184,134,11,0.35)}
+.bp:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,134,11,0.45)}
+.bs{background:var(--cream-d);color:var(--brown);border:0.5px solid var(--bds);padding:0.45rem 0.9rem}
+.bs:hover:not(:disabled){background:var(--gold-l)}
+.bok{background:linear-gradient(135deg,#3A7A28,#285C18);color:#fff;padding:0.45rem 1rem}
+.btn-sm{padding:0.38rem 0.75rem;font-size:0.78rem}
+.svg-box{background:var(--cream-d);border:2px dashed var(--bds);border-radius:var(--r);min-height:300px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:0.9rem;transition:border-color 0.3s}
+.svg-box.has{border-style:solid;border-color:var(--gold);background:#FBF5E8}
+.svg-box svg{width:100%;height:auto;display:block}
+.ph{color:var(--muted);font-size:0.85rem;text-align:center;padding:2rem;opacity:0.7}
+.ldr{display:flex;flex-direction:column;align-items:center;gap:0.7rem;padding:2rem}
+.spin{width:38px;height:38px;border:3px solid var(--gold-l);border-top-color:var(--gold);border-radius:50%;animation:sp 0.85s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.lt{font-size:0.82rem;color:var(--muted);font-weight:600}
+.ls{font-size:0.75rem;color:var(--muted);opacity:0.7}
+.appr{display:flex;gap:0.6rem;align-items:center;flex-wrap:wrap;padding:0.8rem;background:var(--cream-d);border-radius:var(--rs);border:0.5px solid var(--bdr);margin-top:0.85rem}
+.appr span{font-size:0.83rem;font-weight:700;color:var(--brown-d);flex:1}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:0.45rem;margin-bottom:0.65rem}
+.mb{padding:0.48rem 0.65rem;font-size:0.77rem;font-weight:500;background:var(--cream-d);color:var(--brown);border:0.5px solid var(--bds);border-radius:var(--rs);cursor:pointer;text-align:center}
+.mb:hover{background:var(--gold-l);border-color:var(--gold)}
+.mi-row{display:flex;gap:0.4rem;margin-top:0.55rem}
+.mi{flex:1;padding:0.45rem 0.8rem;font-size:0.85rem;border:1.5px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
+.mi:focus{border-color:var(--gold)}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:0.5rem;margin-top:0.65rem}
+.ic{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.55rem 0.5rem;font-size:0.8rem;font-weight:600;color:var(--brown-d);cursor:pointer;text-align:center;line-height:1.45;transition:all 0.2s}
+.ic:hover{background:var(--gold-l);border-color:var(--gold);transform:translateY(-1px)}
+.sh{font-size:0.9rem;font-weight:700;color:var(--brown-d);margin-bottom:0.5rem}
+.divd{border:none;border-top:0.5px solid var(--bdr);margin:0.8rem 0}
+.gmeta{display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;margin-bottom:0.8rem}
+.mc{background:var(--cream-d);border:0.5px solid var(--bdr);border-radius:var(--rs);padding:0.65rem}
+.ml{font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem}
+.mv{font-size:0.83rem;color:var(--text);line-height:1.5}
+.cbdgs{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.2rem}
+.cb{display:inline-flex;align-items:center;gap:0.25rem;padding:0.15rem 0.48rem;border-radius:20px;font-size:0.7rem;font-weight:500;border:1.5px solid var(--bds);background:#fff}
+.cdot{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,0.12);flex-shrink:0}
+.sl{list-style:none;counter-reset:sc;margin-top:0.4rem}
+.sl li{counter-increment:sc;display:flex;gap:0.7rem;margin-bottom:0.65rem;align-items:flex-start;line-height:1.55;font-size:0.84rem}
+.sl li::before{content:counter(sc);min-width:22px;height:22px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.tip{background:#FFF9ED;border-right:4px solid #D4A800;padding:0.65rem 0.85rem;margin-top:0.6rem;font-size:0.8rem;color:#6B4E00;line-height:1.55}
+.tip b{display:block;margin-bottom:0.15rem}
+.upg{background:#F0F8F0;border-right:4px solid #5A9E5A;padding:0.65rem 0.85rem;margin-top:0.6rem;font-size:0.8rem;color:#2A5A2A;line-height:1.55}
+.upg b{display:block;margin-bottom:0.15rem}
+.ith{background:linear-gradient(135deg,var(--brown-d),#5C3A1E);border-radius:var(--r) var(--r) 0 0;padding:0.85rem 1.2rem;display:flex;align-items:center;gap:0.6rem}
+.ith h3{font-family:'Frank Ruhl Libre',serif;font-size:1.1rem;color:var(--gold-l);font-weight:700}
+.itb{background:#fff;border:0.5px solid var(--bdr);border-radius:0 0 var(--r) var(--r);padding:1.2rem;margin-bottom:1.2rem}
+.bk{background:none;border:1px solid rgba(245,230,192,0.3);color:var(--gold-l);padding:0.25rem 0.6rem;border-radius:var(--rs);font-size:0.73rem;cursor:pointer;margin-right:auto;font-family:'Heebo',sans-serif}
+.err{background:#FEF0F0;border:0.5px solid #F09090;border-radius:var(--rs);padding:0.7rem;color:#A32D2D;font-size:0.8rem;margin-top:0.6rem}
+.art-area{background:var(--cream-d);border:2px dashed var(--bds);border-radius:var(--r);padding:1rem;text-align:center;margin-top:0.85rem}
+.art-area svg{max-width:100%;border-radius:var(--rs);margin-top:0.5rem}
+.hidden{display:none!important}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.gs{animation:fi 0.3s ease}
+.exb{display:flex;flex-wrap:wrap;gap:0.4rem}
+.key-note{background:#FFF8E8;border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.7rem 1rem;font-size:0.78rem;color:var(--brown);line-height:1.6;margin-bottom:1rem}
+.key-note b{color:var(--brown-d)}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <h1>✦ סטודיו פלסטלינה ✦</h1>
+  <p>פרויקטים שלב-אחר-שלב בסגנון יהודי חרדי</p>
+</header>
+
+<div class="api-bar">
+  <label>🔑 מפתח API של Anthropic:</label>
+  <input type="password" id="apikey" placeholder="sk-ant-api03-..." autocomplete="off">
+  <span class="api-status no" id="api-status">לא מוגדר</span>
+  <button class="bs btn-sm" onclick="saveKey()">שמור</button>
+</div>
+
+<main class="main">
+
+  <div class="steps">
+    <div class="st on" id="t1"><span class="sn">①</span>רעיון</div>
+    <div class="st" id="t2"><span class="sn">②</span>קונספט</div>
+    <div class="st" id="t3"><span class="sn">③</span>פריטים</div>
+    <div class="st" id="t4"><span class="sn">④</span>מדריך</div>
+  </div>
+
+  <div id="v1">
+    <div class="card">
+      <div class="ctit">💡 מה תרצי לבנות מפלסטלינה?</div>
+      <div class="key-note">
+        <b>הוראות הגדרה (פעם אחת בלבד):</b><br>
+        1. היכנסי ל־<b>console.anthropic.com</b> → API Keys → צרי מפתח חדש<br>
+        2. הדביקי אותו בשדה למעלה ולחצי <b>שמור</b><br>
+        3. פתחי את הקובץ הזה <b>ישירות מהמחשב</b> (לא דרך Claude.ai) — גררי אותו לדפדפן
+      </div>
+      <textarea id="idea" placeholder="לדוגמה: שולחן שבת עם חלות, גביע קידוש, נרות ואבא חרדי בכובע שחור..."></textarea>
+      <div style="margin-top:0.7rem;display:flex;gap:0.55rem;align-items:center;flex-wrap:wrap">
+        <button class="bp" id="btn1">✦ צרי תמונת קונספט</button>
+        <span style="font-size:0.75rem;color:var(--muted)">תמונה תיווצר תוך ~15 שניות</span>
+      </div>
+      <div style="margin-top:1rem;padding-top:0.85rem;border-top:0.5px solid var(--bdr)">
+        <div class="sh" style="font-size:0.78rem;margin-bottom:0.4rem">✨ רעיונות לדוגמה</div>
+        <div class="exb">
+          <button class="mb" onclick="si('שולחן שבת עם חלות, גביע קידוש, נרות, מפת שבת, ואבא חרדי ואמא עם מטפחת')">🕯️ שולחן שבת</button>
+          <button class="mb" onclick="si('ליל הסדר עם קערת סדר, אבא חרדי מסב, ילדים שואלים, מצות, כוס אליהו')">🍷 ליל הסדר</button>
+          <button class="mb" onclick="si('חיידר עם ילדים בכיפות ופאות לומדים עם רבי, ספרי קודש')">📖 חיידר</button>
+          <button class="mb" onclick="si('משפחה חרדית מדליקה חנוכייה, סביבון, לביבות, ילדים שמחים')">🕎 חנוכה</button>
+          <button class="mb" onclick="si('בית כנסת עם ארון קודש, בימה, ספר תורה, אנשים חרדים מתפללים')">🕍 בית כנסת</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="v2" class="hidden">
+    <div class="card">
+      <div class="ctit">🖼️ תמונת קונספט ראשית</div>
+      <div class="svg-box" id="swrap">
+        <div class="ldr" id="cldr">
+          <div class="spin"></div>
+          <div class="lt" id="lt">יוצרת תמונת קונספט...</div>
+          <div class="ls" id="ls">מצייר סצנה חרדית בפלסטלינה</div>
+        </div>
+        <div class="ph hidden" id="cph">🎨<br>התמונה תופיע כאן</div>
+        <div id="csvg" class="hidden" style="width:100%"></div>
+      </div>
+      <div id="cerr" class="err hidden"></div>
+      <div class="appr hidden" id="appr">
+        <span>הציור מוכן — האם מתאים לפרויקט?</span>
+        <button class="bok" id="btn-appr">✓ אשרי ועברי לפריטים</button>
+      </div>
+      <div id="modsec" class="hidden" style="margin-top:0.9rem">
+        <div class="sh" style="font-size:0.8rem">🔧 שני את הציור</div>
+        <div class="mgrid">
+          <button class="mb" onclick="mod('הפכי לחרדי יותר: כובע שחור, חליפה כהה, ציצית, לבוש צנוע')">יותר חרדי</button>
+          <button class="mb" onclick="mod('פשטי — פחות פרטים, צורות ברורות')">יותר פשוט</button>
+          <button class="mb" onclick="mod('הוסיפי יותר פרטים ועשירות לסצנה')">יותר מפורט</button>
+          <button class="mb" onclick="mod('גרמי לכל הפריטים להיראות כמו פלסטלינה אמיתית עם טקסטורה עבה')">יותר פלסטלינה</button>
+          <button class="mb" onclick="mod('תקני דמויות — חרדיות לחלוטין, ללא מרכיב חילוני')">תקני דמויות</button>
+          <button class="mb" onclick="doGen(S.hist)">↺ צרי מחדש</button>
+        </div>
+        <div class="mi-row">
+          <input class="mi" id="cmod" placeholder="בקשה חופשית... (לדוגמה: הוסיפי ילד עם גמרא)">
+          <button class="bs btn-sm" onclick="custMod()">שני →</button>
+        </div>
+      </div>
+      <div style="margin-top:0.7rem;display:flex;gap:0.5rem">
+        <button class="bs btn-sm" onclick="go(1)">← חזרי</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="v3" class="hidden">
+    <div class="card">
+      <div class="ctit">📋 פריטים בפרויקט</div>
+      <div class="ldr hidden" id="ildr"><div class="spin"></div><div class="lt">מכין רשימת פריטים...</div></div>
+      <div id="ilist" class="hidden">
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.55rem">לחצי על פריט לפתיחת מדריך בנייה מלא:</p>
+        <div class="igrid" id="igrid"></div>
+      </div>
+      <div id="ierr" class="err hidden"></div>
+      <div style="margin-top:0.8rem"><button class="bs btn-sm" onclick="go(2)">← חזרי לציור</button></div>
+    </div>
+  </div>
+
+  <div id="v4" class="hidden">
+    <div id="guidec"></div>
+  </div>
+
+</main>
+
+<script>
+const S={idea:'',hist:[],items:[],cur:null,key:''};
+const $=id=>document.getElementById(id);
+const sh=id=>$(id).classList.remove('hidden');
+const hd=id=>$(id).classList.add('hidden');
+function si(t){$('idea').value=t}
+
+function saveKey(){
+  const k=$('apikey').value.trim();
+  if(!k)return;
+  S.key=k;
+  localStorage.setItem('anthro_key',k);
+  $('api-status').textContent='מוגדר ✓';
+  $('api-status').className='api-status ok';
+}
+
+(function loadKey(){
+  const k=localStorage.getItem('anthro_key');
+  if(k){S.key=k;$('apikey').value=k;$('api-status').textContent='מוגדר ✓';$('api-status').className='api-status ok';}
+})();
+
+function go(n){
+  [1,2,3,4].forEach(i=>{
+    const v=$('v'+i),t=$('t'+i);
+    if(v)v.classList.toggle('hidden',i!==n);
+    if(t){t.classList.remove('on','done');if(i===n)t.classList.add('on');else if(i<n)t.classList.add('done');}
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+async function callClaude(messages,sys,max=4000){
+  if(!S.key){throw new Error('חסר מפתח API — הזיני אותו למעלה');}
+  const r=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'x-api-key':S.key,
+      'anthropic-version':'2023-06-01',
+      'anthropic-dangerous-direct-browser-access':'true'
+    },
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:max,system:sys,messages})
+  });
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'שגיאת API '+r.status);}
+  const d=await r.json();
+  return d.content.map(b=>b.text||'').join('');
+}
+
+function buildPrompt(mods){
+  const modTxt=mods.length?'\nשינויים:\n'+mods.map((m,i)=>`${i+1}. ${m}`).join('\n'):'';
+  return `צרי ציור SVG מפורט ועשיר של פרויקט פלסטלינה: "${S.idea}"${modTxt}
+
+דרישות:
+- viewBox="0 0 800 480"
+- רקע: קיר #F5ECD4, שולחן עץ #D4956A מגובה 255
+- לפחות 25 אלמנטים, rx גבוה (פלסטלינה מעוגלת)
+- צבעים עזים ומלאים
+- דמויות חרדיות: כובע שחור+חליפה כהה+ציצית לגברים; מטפחת+שמלה ארוכה לנשים; כיפה+פאות לילדים
+- ללא דגל ישראל וסמלי מדינה
+- צלליות: אליפסות #00000015 מתחת לפריטים
+
+החזר SVG בלבד — החל מ-<svg וסיים ב-</svg>, ללא שום טקסט אחר.`;
+}
+
+async function doGen(mods){
+  hd('appr');hd('modsec');hd('cerr');
+  const w=$('swrap');
+  w.classList.remove('has');
+  $('csvg').classList.add('hidden');$('csvg').innerHTML='';
+  hd('cph');sh('cldr');
+  $('lt').textContent='מצייר סצנה...';
+  $('ls').textContent='עוד כ-15 שניות';
+  try{
+    const txt=await callClaude(
+      [{role:'user',content:buildPrompt(mods)}],
+      'אתה אמן SVG המייצר ציורי פלסטלינה חרדיים. החזר SVG בלבד מ-<svg עד </svg> ללא שום טקסט נוסף.',
+      4000
+    );
+    const m=txt.match(/<svg[\s\S]*?<\/svg>/i);
+    if(!m)throw new Error('לא התקבל SVG תקין');
+    hd('cldr');
+    $('csvg').innerHTML=m[0];
+    sh('csvg');w.classList.add('has');
+    sh('appr');sh('modsec');
+  }catch(err){
+    hd('cldr');sh('cph');
+    $('cerr').textContent='שגיאה: '+err.message;
+    sh('cerr');sh('modsec');
+  }
+}
+
+function mod(ins){S.hist.push(ins);doGen(S.hist);}
+function custMod(){const v=$('cmod').value.trim();if(!v)return;$('cmod').value='';mod(v);}
+
+$('btn1').addEventListener('click',()=>{
+  const idea=$('idea').value.trim();
+  if(!idea){$('idea').focus();return;}
+  if(!S.key){alert('יש להזין מפתח API למעלה תחילה');return;}
+  S.idea=idea;S.hist=[];go(2);doGen([]);
+});
+
+$('btn-appr').addEventListener('click',async()=>{
+  go(3);sh('ildr');hd('ilist');hd('ierr');
+  try{
+    const r=await callClaude(
+      [{role:'user',content:`פרויקט: "${S.idea}"\nרשמי את כל הפריטים לבנייה. JSON בלבד ללא backticks:\n{"items":[{"id":"1","name":"שם עברי","emoji":"🎨"},...]} עד 20 פריטים.`}],
+      'החזר JSON בלבד.',800
+    );
+    const m=r.replace(/```json|```/g,'').match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('לא התקבלה רשימה תקינה');
+    const data=JSON.parse(m[0]);
+    S.items=data.items||[];
+    hd('ildr');sh('ilist');
+    const g=$('igrid');g.innerHTML='';
+    S.items.forEach(item=>{
+      const c=document.createElement('div');
+      c.className='ic';
+      c.innerHTML=`<span style="font-size:0.95rem">${item.emoji}</span><br>${item.name}`;
+      c.onclick=()=>openGuide(item);
+      g.appendChild(c);
+    });
+  }catch(err){
+    hd('ildr');$('ierr').textContent='שגיאה: '+err.message;sh('ierr');
+  }
+});
+
+async function openGuide(item){
+  S.cur=item;go(4);
+  const c=$('guidec');
+  c.innerHTML=`<div class="ith"><button class="bk" onclick="go(3)">← חזרי</button><h3>${item.emoji} ${item.name}</h3></div>
+<div class="itb">
+  <div class="ldr" id="gldr"><div class="spin"></div><div class="lt">יוצרת מדריך עבור ${item.name}...</div></div>
+  <div id="gc" class="hidden"></div>
+  <div id="ge" class="err hidden"></div>
+</div>`;
+  try{
+    const r=await callClaude(
+      [{role:'user',content:`מדריך פלסטלינה עבור: "${item.name}" (פרויקט: "${S.idea}")\nJSON בלבד ללא backticks:\n{"name":"","goal":"","colors":[{"name":"","hex":"","use":""}],"basicShapes":[],"steps":[],"correctionTips":"","upgradeIdeas":""}\n6-9 שלבים. אם דמות חרדית — תארי לבוש מלא.`}],
+      'החזר JSON בלבד.',2000
+    );
+    const m=r.replace(/```json|```/g,'').match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('');
+    const g=JSON.parse(m[0]);
+    document.getElementById('gldr')?.classList.add('hidden');
+    const gc=document.getElementById('gc');
+    if(gc){gc.classList.remove('hidden');renderGuide(gc,g);}
+  }catch(err){
+    document.getElementById('gldr')?.classList.add('hidden');
+    const ge=document.getElementById('ge');
+    if(ge){ge.textContent='שגיאה: '+err.message;ge.classList.remove('hidden');}
+  }
+}
+
+function renderGuide(el,g){
+  const dots=(g.colors||[]).map(c=>`<div class="cb"><div class="cdot" style="background:${c.hex}"></div><span>${c.name}</span><span style="color:var(--muted);font-size:0.68rem"> — ${c.use}</span></div>`).join('');
+  const steps=(g.steps||[]).map(s=>`<li>${s}</li>`).join('');
+  el.innerHTML=`<div class="gs">
+<div class="gmeta">
+  <div class="mc" style="grid-column:1/-1"><div class="ml">🎯 מטרה סופית</div><div class="mv" style="font-weight:600">${g.goal}</div></div>
+  <div class="mc"><div class="ml">🔷 צורות בסיס</div><div class="mv" style="font-size:0.78rem;line-height:1.55">${(g.basicShapes||[]).join(' · ')}</div></div>
+  <div class="mc"><div class="ml">🎨 צבעים</div><div class="cbdgs">${dots}</div></div>
+</div>
+<div class="divd"></div>
+<div class="sh">📋 שלבי הבנייה</div>
+<ol class="sl">${steps}</ol>
+<div class="tip"><b>💡 טיפים לתיקון</b>${g.correctionTips}</div>
+<div class="upg"><b>⭐ שדרוגים</b>${g.upgradeIdeas}</div>
+<div class="divd"></div>
+<div class="art-area" id="artarea">
+  <div class="sh" style="font-size:0.85rem">🖼️ ציור עזר לפריט</div>
+  <p style="font-size:0.75rem;color:var(--muted);margin-bottom:0.5rem">ציור SVG שיסייע בבנייה</p>
+  <div id="aldr" class="ldr hidden"><div class="spin"></div><div class="lt">מצייר...</div></div>
+  <div id="adsp" class="hidden"></div>
+  <button class="bs btn-sm" id="abtn" onclick="genArt()">🎨 צרי ציור לפריט זה</button>
+</div>
+</div>`;
+  el._g=g;
+}
+
+async function genArt(){
+  const b=document.getElementById('abtn');if(b)b.classList.add('hidden');
+  const l=document.getElementById('aldr');if(l)l.classList.remove('hidden');
+  const item=S.cur;
+  const g=document.getElementById('gc')?._g;
+  try{
+    const t=await callClaude(
+      [{role:'user',content:`SVG viewBox="0 0 400 300" של פריט פלסטלינה: "${item.name}"\n${g?`צבעים: ${(g.colors||[]).map(c=>c.name).join(', ')}. ${g.goal}`:''}\n${item.name.match(/אבא|אמא|ילד|רבי|בן|בת/)?'לבוש חרדי מלא.':''}\nפריט מרכזי אחד, מפורט, פלסטלינה עבה, רקע #FBF5E8.\nSVG בלבד.`}],
+      'אמן SVG — החזר SVG בלבד.',1800
+    );
+    const m=t.match(/<svg[\s\S]*?<\/svg>/i);
+    if(!m)throw new Error('');
+    if(l)l.classList.add('hidden');
+    const d=document.getElementById('adsp');
+    if(d){
+      d.classList.remove('hidden');
+      d.innerHTML=m[0]+`<div style="margin-top:0.4rem"><button class="bs btn-sm" onclick="this.closest('.art-area').querySelector('#adsp').classList.add('hidden');this.closest('.art-area').querySelector('#adsp').innerHTML='';this.closest('.art-area').querySelector('#abtn').classList.remove('hidden')">↺ שוב</button></div>`;
+    }
+  }catch(e){
+    if(l)l.classList.add('hidden');
+    if(b){b.classList.remove('hidden');b.textContent='↺ נסי שוב';}
+  }
+}
+</script>
+</body>
+</html>
+Done
+עכשיו בצעי את הצעדים האלה בדיוק:
+
+שלב 1 — לחצי על "+" ואז "Create new file"
+
+שלב 2 — בשדה השם כתבי: index.html
+
+שלב 3 — העתיקי את כל הטקסט הזה והדביקי בתוך הקובץ:
+
+(לחצי על הקובץ למטה כדי להוריד אותו, ואז גררי את התוכן)
+
+
+Presented file
+Presented file
+שלב 4 — אחרי שהדבקת, גללי למטה ולחצי "Commit changes" (הכפתור הירוק)
+
+שלב 5 — עכשיו לכי ל: vercel.com → לחצי "Sign up with GitHub" → תני לו גישה → תראי את ה-repository plasticine-studio → לחצי Deploy
+
+תוך דקה האפליקציה שלך תהיה חיה באינטרנט עם כתובת כמו: plasticine-studio.vercel.app 🎉
+
+שלחי לי צילום מסך מכל שלב שאת תקועה בו!
+
+
+Plasticine studio
+Code · HTML 
+
+
+
+
+
+
