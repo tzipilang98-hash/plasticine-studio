@@ -13,357 +13,326 @@
   --text:#2C1A0A;--muted:#7A5C3A;
   --bdr:rgba(139,101,20,0.2);--bds:rgba(139,101,20,0.4);
   --r:12px;--rs:8px;
-  --sidebar:280px;
+  --sidebar:270px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Heebo',sans-serif;background:var(--cream);color:var(--text);direction:rtl;height:100vh;overflow:hidden;display:flex;flex-direction:column}
-
-/* ── Header ── */
-.hdr{background:linear-gradient(135deg,#2C1A0A,#5C3A1E);padding:0.8rem 1.5rem;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:1rem;flex-shrink:0}
-.hdr-title{font-family:'Frank Ruhl Libre',serif;font-size:1.4rem;color:var(--gold-l);font-weight:700;flex:1}
-.hdr-sub{color:rgba(245,230,192,0.55);font-size:0.75rem}
-.api-input-wrap{display:flex;align-items:center;gap:0.5rem}
-.api-input-wrap input{padding:0.38rem 0.7rem;font-size:0.75rem;border:1px solid var(--bds);border-radius:var(--rs);background:rgba(255,255,255,0.1);color:var(--gold-l);outline:none;direction:ltr;font-family:monospace;width:220px}
-.api-input-wrap input::placeholder{color:rgba(245,230,192,0.4)}
-.api-input-wrap input:focus{border-color:var(--gold)}
-.api-badge{font-size:0.7rem;padding:0.18rem 0.5rem;border-radius:20px;font-weight:600;white-space:nowrap}
-.api-badge.ok{background:#2A5A2A;color:#90E090}
-.api-badge.no{background:#5A2A2A;color:#F09090}
-
-/* ── Layout ── */
+.hdr{background:linear-gradient(135deg,#2C1A0A,#5C3A1E);padding:0.7rem 1.25rem;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:0.85rem;flex-shrink:0}
+.hdr-title{font-family:'Frank Ruhl Libre',serif;font-size:1.3rem;color:var(--gold-l);font-weight:700;flex:1}
+.hdr-sub{color:rgba(245,230,192,0.5);font-size:0.7rem}
+.api-wrap{display:flex;align-items:center;gap:0.45rem}
+.api-wrap input{padding:0.32rem 0.65rem;font-size:0.72rem;border:1px solid var(--bds);border-radius:var(--rs);background:rgba(255,255,255,0.1);color:var(--gold-l);outline:none;direction:ltr;font-family:monospace;width:200px}
+.api-wrap input::placeholder{color:rgba(245,230,192,0.35)}
+.api-wrap input:focus{border-color:var(--gold)}
+.apibdg{font-size:0.67rem;padding:0.15rem 0.45rem;border-radius:20px;font-weight:600;white-space:nowrap}
+.apibdg.ok{background:#2A5A2A;color:#90E090}
+.apibdg.no{background:#5A2A2A;color:#F09090}
 .app-body{display:flex;flex:1;overflow:hidden}
-
-/* ── Sidebar ── */
 .sidebar{width:var(--sidebar);background:#fff;border-left:1px solid var(--bdr);display:flex;flex-direction:column;flex-shrink:0;overflow:hidden}
-.sidebar-header{padding:0.85rem 1rem;border-bottom:1px solid var(--bdr);background:var(--cream-d)}
-.sidebar-title{font-family:'Frank Ruhl Libre',serif;font-size:0.95rem;font-weight:700;color:var(--brown-d);margin-bottom:0.5rem}
-.search-box{width:100%;padding:0.4rem 0.65rem;font-size:0.8rem;border:1px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
-.search-box:focus{border-color:var(--gold)}
-.sidebar-list{flex:1;overflow-y:auto;padding:0.5rem}
-.new-shiur-btn{display:flex;align-items:center;gap:0.5rem;padding:0.65rem 0.85rem;border:2px dashed var(--bds);border-radius:var(--rs);cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--muted);transition:all 0.2s;margin-bottom:0.5rem;background:none;width:100%;font-family:'Heebo',sans-serif;justify-content:center}
-.new-shiur-btn:hover{border-color:var(--gold);color:var(--gold-d);background:var(--gold-l)}
-
-/* ── Shiur Card ── */
-.shiur-card{padding:0.65rem 0.75rem;border-radius:var(--rs);cursor:pointer;transition:all 0.2s;margin-bottom:0.35rem;border:1px solid transparent;position:relative}
-.shiur-card:hover{background:var(--cream-d);border-color:var(--bdr)}
-.shiur-card.active{background:var(--gold-l);border-color:var(--gold)}
-.shiur-card-top{display:flex;align-items:flex-start;gap:0.4rem}
-.shiur-card-name{font-size:0.82rem;font-weight:700;color:var(--brown-d);flex:1;line-height:1.35}
-.star-btn{background:none;border:none;cursor:pointer;font-size:0.9rem;opacity:0.4;padding:0;flex-shrink:0;transition:opacity 0.2s}
-.star-btn.starred{opacity:1}
-.shiur-card-rabbi{font-size:0.74rem;color:var(--muted);margin-top:0.15rem}
-.shiur-card-meta{display:flex;align-items:center;gap:0.4rem;margin-top:0.3rem;flex-wrap:wrap}
-.status-badge{font-size:0.65rem;padding:0.1rem 0.4rem;border-radius:20px;font-weight:600}
-.status-ready{background:#E0F0E0;color:#2A5A2A}
-.status-processing{background:#FFF3CC;color:#7A5C00}
-.status-check{background:#FFE0E0;color:#A32D2D}
-.topic-tag{font-size:0.65rem;padding:0.1rem 0.4rem;border-radius:20px;background:var(--cream-d);color:var(--muted);border:0.5px solid var(--bds)}
-.shiur-date{font-size:0.68rem;color:var(--muted)}
-.no-shiurim{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.82rem;opacity:0.7}
-
-/* ── Main content ── */
-.main-content{flex:1;display:flex;flex-direction:column;overflow:hidden}
-
-/* ── Empty state ── */
-.empty-state{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;opacity:0.6}
-.empty-icon{font-size:3rem}
-.empty-text{font-family:'Frank Ruhl Libre',serif;font-size:1.2rem;color:var(--brown-d)}
-.empty-sub{font-size:0.85rem;color:var(--muted);text-align:center}
-
-/* ── Shiur view ── */
-.shiur-view{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.shiur-header{padding:0.85rem 1.25rem;border-bottom:1px solid var(--bdr);background:var(--cream-d);flex-shrink:0}
-.shiur-header-top{display:flex;align-items:flex-start;gap:0.75rem}
-.shiur-name-edit{font-family:'Frank Ruhl Libre',serif;font-size:1.25rem;font-weight:700;color:var(--brown-d);border:none;background:transparent;direction:rtl;font-family:'Frank Ruhl Libre',serif;outline:none;width:100%;cursor:text}
-.shiur-name-edit:focus{border-bottom:1px solid var(--gold)}
-.shiur-meta-row{display:flex;gap:0.75rem;margin-top:0.5rem;flex-wrap:wrap;align-items:center}
-.meta-field{display:flex;align-items:center;gap:0.3rem;font-size:0.78rem;color:var(--muted)}
-.meta-field input,.meta-field select{padding:0.2rem 0.45rem;font-size:0.75rem;border:1px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
-.meta-field select{cursor:pointer}
-.shiur-actions{display:flex;gap:0.5rem;margin-top:0.6rem;flex-wrap:wrap}
-
-/* ── Tabs ── */
-.tabs-bar{display:flex;border-bottom:2px solid var(--gold-l);padding:0 1.25rem;background:#fff;flex-shrink:0;overflow-x:auto}
-.tab-btn{padding:0.6rem 0.9rem;font-size:0.8rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s;white-space:nowrap;background:none;border-top:none;border-right:none;border-left:none;font-family:'Heebo',sans-serif}
-.tab-btn.active{color:var(--gold-d);border-bottom-color:var(--gold)}
-.tab-btn:hover:not(.active){color:var(--brown)}
-
-/* ── Tab content ── */
-.tab-panels{flex:1;overflow-y:auto}
-.tab-panel{display:none;padding:1.25rem;height:100%}
-.tab-panel.active{display:block}
-
-/* ── Upload panel ── */
-.upload-area{border:2px dashed var(--bds);border-radius:var(--r);padding:2rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--cream);margin-bottom:1rem}
+.sb-hdr{padding:0.75rem 0.85rem;border-bottom:1px solid var(--bdr);background:var(--cream-d)}
+.sb-title{font-family:'Frank Ruhl Libre',serif;font-size:0.9rem;font-weight:700;color:var(--brown-d);margin-bottom:0.45rem}
+.sb-search{width:100%;padding:0.38rem 0.6rem;font-size:0.78rem;border:1px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
+.sb-search:focus{border-color:var(--gold)}
+.sb-list{flex:1;overflow-y:auto;padding:0.45rem}
+.new-btn{display:flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.55rem;border:2px dashed var(--bds);border-radius:var(--rs);cursor:pointer;font-size:0.78rem;font-weight:600;color:var(--muted);transition:all 0.2s;margin-bottom:0.45rem;background:none;width:100%;font-family:'Heebo',sans-serif}
+.new-btn:hover{border-color:var(--gold);color:var(--gold-d);background:var(--gold-l)}
+.sc{padding:0.6rem 0.7rem;border-radius:var(--rs);cursor:pointer;transition:all 0.2s;margin-bottom:0.3rem;border:1px solid transparent}
+.sc:hover{background:var(--cream-d);border-color:var(--bdr)}
+.sc.active{background:var(--gold-l);border-color:var(--gold)}
+.sc-top{display:flex;align-items:flex-start;gap:0.35rem}
+.sc-name{font-size:0.8rem;font-weight:700;color:var(--brown-d);flex:1;line-height:1.3}
+.star-btn{background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:0.35;padding:0;flex-shrink:0;transition:opacity 0.2s}
+.star-btn.on{opacity:1}
+.sc-rabbi{font-size:0.72rem;color:var(--muted);margin-top:0.12rem}
+.sc-meta{display:flex;gap:0.35rem;margin-top:0.28rem;flex-wrap:wrap;align-items:center}
+.sbdg{font-size:0.62rem;padding:0.08rem 0.38rem;border-radius:20px;font-weight:600}
+.s-ready{background:#E0F0E0;color:#2A5A2A}
+.s-proc{background:#FFF3CC;color:#7A5C00}
+.s-check{background:#FFE0E0;color:#A32D2D}
+.s-new{background:var(--cream-d);color:var(--muted)}
+.ttag{font-size:0.62rem;padding:0.08rem 0.38rem;border-radius:20px;background:var(--cream-d);color:var(--muted);border:0.5px solid var(--bds)}
+.sc-date{font-size:0.66rem;color:var(--muted)}
+.no-sh{text-align:center;padding:1.5rem 0.75rem;color:var(--muted);font-size:0.78rem;opacity:0.65}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.85rem;padding:2rem;opacity:0.55}
+.empty-icon{font-size:2.5rem}
+.empty-text{font-family:'Frank Ruhl Libre',serif;font-size:1.1rem;color:var(--brown-d)}
+.empty-sub{font-size:0.8rem;color:var(--muted);text-align:center}
+.sv{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.sv-hdr{padding:0.75rem 1.1rem;border-bottom:1px solid var(--bdr);background:var(--cream-d);flex-shrink:0}
+.sv-name{font-family:'Frank Ruhl Libre',serif;font-size:1.15rem;font-weight:700;color:var(--brown-d);border:none;background:transparent;direction:rtl;font-family:'Frank Ruhl Libre',serif;outline:none;width:100%;cursor:text}
+.sv-name:focus{border-bottom:1px solid var(--gold)}
+.sv-meta{display:flex;gap:0.65rem;margin-top:0.45rem;flex-wrap:wrap;align-items:center}
+.mf{display:flex;align-items:center;gap:0.25rem;font-size:0.75rem;color:var(--muted)}
+.mf input,.mf select{padding:0.18rem 0.4rem;font-size:0.72rem;border:1px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
+.sv-acts{display:flex;gap:0.45rem;margin-top:0.5rem;flex-wrap:wrap}
+.tabs-bar{display:flex;border-bottom:2px solid var(--gold-l);padding:0 1.1rem;background:#fff;flex-shrink:0;overflow-x:auto}
+.tb{padding:0.55rem 0.8rem;font-size:0.77rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all 0.2s;white-space:nowrap;background:none;border-top:none;border-right:none;border-left:none;font-family:'Heebo',sans-serif}
+.tb.on{color:var(--gold-d);border-bottom-color:var(--gold)}
+.tb:hover:not(.on){color:var(--brown)}
+.panels{flex:1;overflow-y:auto}
+.panel{display:none;padding:1.1rem}
+.panel.on{display:block}
+.upload-area{border:2px dashed var(--bds);border-radius:var(--r);padding:2rem 1rem;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--cream);margin-bottom:0.85rem}
 .upload-area:hover,.upload-area.over{border-color:var(--gold);background:var(--gold-l)}
-.upload-icon{font-size:2rem;margin-bottom:0.4rem}
-.upload-text{font-size:0.88rem;font-weight:600;color:var(--brown-d)}
-.upload-sub{font-size:0.75rem;color:var(--muted)}
-.file-info-bar{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.6rem 0.9rem;display:flex;align-items:center;gap:0.65rem;margin-bottom:1rem}
-.cost-tag{background:var(--gold-l);color:var(--gold-d);font-size:0.7rem;font-weight:700;padding:0.12rem 0.45rem;border-radius:20px;margin-right:auto}
-
-/* ── Progress ── */
-.progress-section{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--r);padding:1rem 1.25rem;margin-top:0.75rem}
-.steps-row{display:flex;gap:0;border-radius:var(--rs);overflow:hidden;border:0.5px solid var(--bds);margin-bottom:0.75rem}
-.step-pill{flex:1;padding:0.35rem 0.2rem;text-align:center;font-size:0.65rem;font-weight:600;color:var(--muted);background:var(--cream-d);border-left:0.5px solid var(--bds);transition:all 0.3s}
-.step-pill:last-child{border-left:none}
-.step-pill.active{background:var(--gold);color:#fff}
-.step-pill.done{background:var(--gold-l);color:var(--gold-d)}
-.prog-bar-bg{background:rgba(0,0,0,0.08);border-radius:20px;height:8px;overflow:hidden;margin-bottom:0.5rem}
-.prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-d));height:100%;border-radius:20px;transition:width 0.5s;width:0%}
-.prog-status{font-size:0.8rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem}
-.spin{width:16px;height:16px;border:2px solid var(--gold-l);border-top-color:var(--gold);border-radius:50%;animation:sp .85s linear infinite;flex-shrink:0}
+.uicon{font-size:1.8rem;margin-bottom:0.35rem}
+.utext{font-size:0.85rem;font-weight:600;color:var(--brown-d)}
+.usub{font-size:0.72rem;color:var(--muted)}
+input[type=file]{display:none}
+.fbar{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.55rem 0.85rem;display:flex;align-items:center;gap:0.6rem;margin-bottom:0.85rem;flex-wrap:wrap}
+.ctag{background:var(--gold-l);color:var(--gold-d);font-size:0.68rem;font-weight:700;padding:0.12rem 0.42rem;border-radius:20px}
+.prog-wrap{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--r);padding:0.85rem 1.1rem;margin-top:0.7rem}
+.steps-row{display:flex;gap:0;border-radius:var(--rs);overflow:hidden;border:0.5px solid var(--bds);margin-bottom:0.65rem}
+.sp{flex:1;padding:0.32rem 0.2rem;text-align:center;font-size:0.62rem;font-weight:600;color:var(--muted);background:var(--cream-d);border-left:0.5px solid var(--bds);transition:all 0.3s}
+.sp:last-child{border-left:none}
+.sp.on{background:var(--gold);color:#fff}
+.sp.done{background:var(--gold-l);color:var(--gold-d)}
+.pbg{background:rgba(0,0,0,0.07);border-radius:20px;height:7px;overflow:hidden;margin-bottom:0.45rem}
+.pb{background:linear-gradient(90deg,var(--gold),var(--gold-d));height:100%;border-radius:20px;transition:width 0.5s;width:0%}
+.pstat{font-size:0.77rem;color:var(--muted);display:flex;align-items:center;gap:0.45rem}
+.spin{width:15px;height:15px;border:2px solid var(--gold-l);border-top-color:var(--gold);border-radius:50%;animation:sp .85s linear infinite;flex-shrink:0}
 @keyframes sp{to{transform:rotate(360deg)}}
-
-/* ── Text display ── */
-.text-box{background:var(--cream);border:0.5px solid var(--bds);border-radius:var(--rs);padding:1.25rem;font-size:0.9rem;line-height:2;color:var(--text);min-height:300px;font-family:'Heebo',sans-serif;direction:rtl}
-.text-box.raw{white-space:pre-wrap;font-size:0.88rem;line-height:1.85}
-.text-box h2{font-family:'Frank Ruhl Libre',serif;font-size:1.05rem;font-weight:700;color:var(--brown-d);margin:1.2rem 0 0.45rem;padding-bottom:0.28rem;border-bottom:1px solid var(--gold-l)}
-.text-box h2:first-child{margin-top:0}
-.text-box p{margin-bottom:0.7rem;line-height:1.95}
-.unclear-mark{background:#FFF3CC;color:#7A5C00;padding:0.05rem 0.3rem;border-radius:4px;font-size:0.88em;border:1px solid #E8C862;cursor:help}
-.empty-tab{text-align:center;padding:3rem;color:var(--muted);font-size:0.85rem;opacity:0.6}
-.empty-tab .e-icon{font-size:2rem;margin-bottom:0.5rem}
-
-/* ── Sources panel ── */
-.sources-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
-.source-group{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.85rem}
-.source-group-title{font-size:0.8rem;font-weight:700;color:var(--brown-d);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.35rem}
-.source-item{font-size:0.8rem;color:var(--text);padding:0.25rem 0;border-bottom:0.5px solid var(--bdr);line-height:1.5}
-.source-item:last-child{border-bottom:none}
-.unclear-item{background:#FFF3CC;border:0.5px solid #E8C862;border-radius:var(--rs);padding:0.85rem;margin-top:0.75rem}
-
-/* ── Compare mode ── */
-.compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1rem;height:100%}
-.compare-side{display:flex;flex-direction:column;gap:0.5rem}
-.compare-label{font-size:0.78rem;font-weight:700;color:var(--muted);padding-bottom:0.35rem;border-bottom:1px solid var(--bdr)}
-.compare-text{flex:1;background:var(--cream);border:0.5px solid var(--bds);border-radius:var(--rs);padding:1rem;font-size:0.85rem;line-height:1.85;overflow-y:auto;white-space:pre-wrap;direction:rtl;font-family:'Heebo',sans-serif}
-
-/* ── Buttons ── */
-.btn{font-family:'Heebo',sans-serif;cursor:pointer;border-radius:var(--rs);border:none;transition:all 0.2s;font-size:0.8rem;font-weight:600;padding:0.42rem 0.85rem;display:inline-flex;align-items:center;gap:0.35rem}
+.tbox{background:var(--cream);border:0.5px solid var(--bds);border-radius:var(--rs);padding:1.25rem;font-size:0.88rem;line-height:1.95;color:var(--text);min-height:250px;font-family:'Heebo',sans-serif;direction:rtl}
+.tbox.raw{white-space:pre-wrap;font-size:0.85rem;line-height:1.85}
+.tbox h2{font-family:'Frank Ruhl Libre',serif;font-size:1.05rem;font-weight:700;color:var(--brown-d);margin:1.1rem 0 0.42rem;padding-bottom:0.25rem;border-bottom:1px solid var(--gold-l)}
+.tbox h2:first-child{margin-top:0}
+.tbox p{margin-bottom:0.65rem;line-height:1.9}
+.unclear{background:#FFF3CC;color:#7A5C00;padding:0.05rem 0.28rem;border-radius:4px;font-size:0.88em;border:1px solid #E8C862;cursor:help}
+.view-bar{display:flex;gap:0.45rem;margin-bottom:0.75rem;flex-wrap:wrap;align-items:center}
+.vbtn{padding:0.32rem 0.72rem;font-size:0.74rem;font-weight:600;background:var(--cream-d);color:var(--brown);border:1.5px solid var(--bds);border-radius:20px;cursor:pointer;transition:all 0.2s;font-family:'Heebo',sans-serif}
+.vbtn:hover{background:var(--gold-l);border-color:var(--gold)}
+.vbtn.on{background:var(--gold);color:#fff;border-color:var(--gold-d)}
+.sum-sec{margin-bottom:1.1rem}
+.sum-h{font-family:'Frank Ruhl Libre',serif;font-size:0.97rem;font-weight:700;color:var(--brown-d);margin-bottom:0.42rem;padding-bottom:0.25rem;border-bottom:1px solid var(--gold-l)}
+.sum-p{font-size:0.85rem;color:var(--text);line-height:1.7}
+.sum-li{display:flex;gap:0.45rem;margin-bottom:0.35rem;font-size:0.83rem;line-height:1.6}
+.sum-li::before{content:"•";color:var(--gold);font-weight:700;flex-shrink:0}
+.sbdge{display:inline-block;background:var(--gold-l);color:var(--gold-d);padding:0.13rem 0.48rem;border-radius:20px;font-size:0.72rem;font-weight:600;margin:0.13rem;font-family:'Frank Ruhl Libre',serif}
+.src-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem}
+.src-grp{background:var(--cream-d);border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.75rem}
+.src-gt{font-size:0.77rem;font-weight:700;color:var(--brown-d);margin-bottom:0.42rem}
+.src-it{font-size:0.77rem;color:var(--text);padding:0.22rem 0;border-bottom:0.5px solid var(--bdr);line-height:1.5}
+.src-it:last-child{border-bottom:none}
+.unc-box{background:#FFF9ED;border:0.5px solid #E8C862;border-radius:var(--rs);padding:0.72rem;margin-top:0.65rem}
+.unc-t{font-size:0.77rem;font-weight:700;color:#7A5C00;margin-bottom:0.38rem}
+.unc-it{font-size:0.77rem;color:#5C4400;padding:0.22rem 0;border-bottom:0.5px solid #E8C862;line-height:1.5}
+.unc-it:last-child{border-bottom:none}
+.cmp-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem}
+.cmp-side{display:flex;flex-direction:column;gap:0.42rem}
+.cmp-lbl{font-size:0.75rem;font-weight:700;color:var(--muted);padding-bottom:0.3rem;border-bottom:1px solid var(--bdr)}
+.cmp-txt{flex:1;background:var(--cream);border:0.5px solid var(--bds);border-radius:var(--rs);padding:0.9rem;font-size:0.82rem;line-height:1.8;overflow-y:auto;max-height:450px;white-space:pre-wrap;direction:rtl;font-family:'Heebo',sans-serif}
+.act-bar{display:flex;gap:0.5rem;margin-top:0.85rem;flex-wrap:wrap}
+.btn{font-family:'Heebo',sans-serif;cursor:pointer;border-radius:var(--rs);border:none;transition:all 0.2s;font-size:0.78rem;font-weight:600;padding:0.38rem 0.78rem;display:inline-flex;align-items:center;gap:0.3rem}
 .btn:disabled{opacity:0.4;cursor:not-allowed}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#fff;box-shadow:0 2px 6px rgba(184,134,11,0.3)}
-.btn-gold:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 3px 10px rgba(184,134,11,0.4)}
+.btn-g{background:linear-gradient(135deg,var(--gold),var(--gold-d));color:#fff;box-shadow:0 2px 6px rgba(184,134,11,0.28)}
+.btn-g:hover:not(:disabled){transform:translateY(-1px)}
 .btn-s{background:var(--cream-d);color:var(--brown);border:0.5px solid var(--bds)}
 .btn-s:hover:not(:disabled){background:var(--gold-l)}
-.btn-danger{background:#FEF0F0;color:#A32D2D;border:0.5px solid #F09090}
-.btn-danger:hover{background:#FFE0E0}
-
-/* ── Summary ── */
-.summary-section{margin-bottom:1.25rem}
-.sum-h{font-family:'Frank Ruhl Libre',serif;font-size:1rem;font-weight:700;color:var(--brown-d);margin-bottom:0.45rem;padding-bottom:0.3rem;border-bottom:1px solid var(--gold-l)}
-.sum-p{font-size:0.87rem;color:var(--text);line-height:1.75}
-.sum-point{display:flex;gap:0.5rem;margin-bottom:0.35rem;font-size:0.85rem;line-height:1.6}
-.sum-point::before{content:"•";color:var(--gold);font-weight:700;flex-shrink:0}
-.source-badge{display:inline-block;background:var(--gold-l);color:var(--gold-d);padding:0.15rem 0.5rem;border-radius:20px;font-size:0.75rem;font-weight:600;margin:0.15rem;font-family:'Frank Ruhl Libre',serif}
-
-/* ── Error ── */
-.err-box{background:#FEF0F0;border:0.5px solid #F09090;border-radius:var(--rs);padding:0.65rem;color:#A32D2D;font-size:0.8rem;margin-top:0.6rem}
-
-/* ── Modal ── */
+.btn-d{background:#FEF0F0;color:#A32D2D;border:0.5px solid #F09090}
+.btn-d:hover{background:#FFE0E0}
+.err{background:#FEF0F0;border:0.5px solid #F09090;border-radius:var(--rs);padding:0.65rem;color:#A32D2D;font-size:0.78rem;margin-top:0.55rem;line-height:1.5}
+.info{background:#EEF6FF;border:0.5px solid #90B8E0;border-radius:var(--rs);padding:0.65rem 0.9rem;font-size:0.77rem;color:#1A4A7A;line-height:1.55;margin-bottom:0.85rem}
+.qlty{display:inline-flex;align-items:center;gap:0.3rem;font-size:0.72rem;padding:0.15rem 0.5rem;border-radius:20px;font-weight:600}
+.ql-h{background:#E0F0E0;color:#2A5A2A}
+.ql-m{background:#FFF3CC;color:#7A5C00}
+.ql-l{background:#FFE0E0;color:#A32D2D}
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100}
-.modal{background:#fff;border-radius:var(--r);padding:1.5rem;width:90%;max-width:480px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
-.modal-title{font-family:'Frank Ruhl Libre',serif;font-size:1.1rem;font-weight:700;color:var(--brown-d);margin-bottom:1rem}
-.modal-field{margin-bottom:0.75rem}
-.modal-field label{font-size:0.78rem;font-weight:700;color:var(--muted);display:block;margin-bottom:0.25rem}
-.modal-field input,.modal-field select{width:100%;padding:0.5rem 0.75rem;font-size:0.87rem;border:1.5px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
-.modal-field input:focus,.modal-field select:focus{border-color:var(--gold)}
-.modal-actions{display:flex;gap:0.5rem;justify-content:flex-start;margin-top:1rem}
-
-input[type=file]{display:none}
+.modal{background:#fff;border-radius:var(--r);padding:1.35rem;width:90%;max-width:460px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+.modal-t{font-family:'Frank Ruhl Libre',serif;font-size:1.05rem;font-weight:700;color:var(--brown-d);margin-bottom:0.9rem}
+.mf-row{margin-bottom:0.65rem}
+.mf-row label{font-size:0.75rem;font-weight:700;color:var(--muted);display:block;margin-bottom:0.22rem}
+.mf-row input,.mf-row select{width:100%;padding:0.45rem 0.7rem;font-size:0.85rem;border:1.5px solid var(--bds);border-radius:var(--rs);background:var(--cream);color:var(--text);direction:rtl;outline:none;font-family:'Heebo',sans-serif}
+.mf-row input:focus,.mf-row select:focus{border-color:var(--gold)}
+.modal-acts{display:flex;gap:0.45rem;justify-content:flex-start;margin-top:0.9rem}
+.empty-tab{text-align:center;padding:2.5rem;color:var(--muted);font-size:0.82rem;opacity:0.55}
 .hidden{display:none!important}
 </style>
 </head>
 <body>
-
-<!-- Header -->
 <header class="hdr">
   <div>
     <div class="hdr-title">📖 ספריית שיעורי תורה</div>
-    <div class="hdr-sub">מערכת מקצועית לתמלול ועריכה</div>
+    <div class="hdr-sub">עורך תורני מקצועי — ניקוי, עריכה, סיכום</div>
   </div>
-  <div class="api-input-wrap">
-    <input type="password" id="apikey" placeholder="sk-proj-... (מפתח OpenAI)" autocomplete="off">
-    <span class="api-badge no" id="api-badge">לא מוגדר</span>
-    <button class="btn btn-s" onclick="saveKey()" style="font-size:0.72rem;padding:0.3rem 0.6rem">שמור</button>
+  <div class="api-wrap">
+    <input type="password" id="apikey" placeholder="sk-proj-... (OpenAI)" autocomplete="off">
+    <span class="apibdg no" id="apibdg">לא מוגדר</span>
+    <button class="btn btn-s" onclick="saveKey()" style="font-size:0.7rem;padding:0.28rem 0.55rem">שמור</button>
   </div>
 </header>
 
-<!-- Body -->
 <div class="app-body">
-
-  <!-- Sidebar -->
   <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-title">📚 השיעורים שלי</div>
-      <input class="search-box" id="search-box" placeholder="חיפוש שיעור..." oninput="renderSidebar()">
+    <div class="sb-hdr">
+      <div class="sb-title">📚 השיעורים שלי</div>
+      <input class="sb-search" id="sb-search" placeholder="חיפוש..." oninput="renderSB()">
     </div>
-    <div class="sidebar-list" id="sidebar-list">
-      <button class="new-shiur-btn" onclick="openNewModal()">＋ שיעור חדש</button>
-      <div id="shiur-cards"></div>
+    <div class="sb-list" id="sb-list">
+      <button class="new-btn" onclick="openModal()">＋ שיעור חדש</button>
+      <div id="sc-list"></div>
     </div>
   </aside>
 
-  <!-- Main -->
-  <main class="main-content" id="main-content">
-    <div class="empty-state" id="empty-state">
+  <main class="main" id="main">
+    <div class="empty" id="empty">
       <div class="empty-icon">📖</div>
       <div class="empty-text">ברוכה הבאה לספריית שיעורי תורה</div>
-      <div class="empty-sub">לחצי על "שיעור חדש" כדי להתחיל,<br>או בחרי שיעור קיים מהרשימה</div>
-      <button class="btn btn-gold" onclick="openNewModal()" style="margin-top:0.5rem">＋ צרי שיעור חדש</button>
+      <div class="empty-sub">לחצי על "שיעור חדש" כדי להתחיל</div>
+      <button class="btn btn-g" onclick="openModal()" style="margin-top:0.35rem">＋ שיעור חדש</button>
     </div>
 
-    <div class="shiur-view hidden" id="shiur-view">
-      <!-- Shiur header -->
-      <div class="shiur-header">
-        <div class="shiur-header-top">
-          <input class="shiur-name-edit" id="shiur-name" placeholder="שם השיעור..." onchange="saveCurrentMeta()">
-          <button class="star-btn" id="star-btn" onclick="toggleStar()" title="סמן כחשוב">⭐</button>
-          <button class="btn btn-danger" onclick="deleteCurrentShiur()" style="font-size:0.72rem;padding:0.28rem 0.6rem">🗑</button>
+    <div class="sv hidden" id="sv">
+      <div class="sv-hdr">
+        <div style="display:flex;align-items:flex-start;gap:0.65rem">
+          <input class="sv-name" id="sv-name" placeholder="שם השיעור..." onchange="saveMeta()">
+          <button class="star-btn" id="star-btn" onclick="toggleStar()">☆</button>
+          <button class="btn btn-d" onclick="delShiur()" style="font-size:0.7rem;padding:0.25rem 0.55rem">🗑</button>
         </div>
-        <div class="shiur-meta-row">
-          <div class="meta-field">👤 <input id="meta-rabbi" placeholder="שם הרב" onchange="saveCurrentMeta()" style="width:120px"></div>
-          <div class="meta-field">📌
-            <select id="meta-topic" onchange="saveCurrentMeta()">
+        <div class="sv-meta">
+          <div class="mf">👤 <input id="m-rabbi" placeholder="שם הרב" onchange="saveMeta()" style="width:110px"></div>
+          <div class="mf">📌
+            <select id="m-topic" onchange="saveMeta()">
               <option value="">נושא...</option>
               <option>מוסר</option><option>פרשת שבוע</option><option>הלכה</option>
-              <option>אמונה</option><option>שבת</option><option>חינוך</option>
-              <option>תפילה</option><option>חגים</option><option>מדרש</option><option>גמרא</option>
+              <option>אמונה וביטחון</option><option>שבת</option><option>חינוך</option>
+              <option>תפילה</option><option>חגים</option><option>גמרא</option>
+              <option>חסידות</option><option>סיפורי צדיקים</option><option>השקפה</option>
             </select>
           </div>
-          <div class="meta-field">🔖
-            <select id="meta-status" onchange="saveCurrentMeta()">
+          <div class="mf">🔖
+            <select id="m-status" onchange="saveMeta()">
               <option value="new">חדש</option>
               <option value="processing">בתהליך</option>
               <option value="ready">מוכן</option>
               <option value="check">צריך בדיקה</option>
             </select>
           </div>
-          <div class="shiur-date" id="meta-date" style="font-size:0.72rem;color:var(--muted)"></div>
+          <span id="m-date" style="font-size:0.7rem;color:var(--muted)"></span>
+          <span id="ql-badge"></span>
         </div>
       </div>
 
-      <!-- Tabs -->
       <div class="tabs-bar">
-        <button class="tab-btn active" onclick="switchTab('upload')">🎵 העלאה ותמלול</button>
-        <button class="tab-btn" onclick="switchTab('raw')">📝 גולמי</button>
-        <button class="tab-btn" onclick="switchTab('clean')">✍️ נקי</button>
-        <button class="tab-btn" onclick="switchTab('edited')">📋 ערוך לקריאה</button>
-        <button class="tab-btn" onclick="switchTab('summary')">💡 סיכום</button>
-        <button class="tab-btn" onclick="switchTab('sources')">🔍 מקורות</button>
-        <button class="tab-btn" onclick="switchTab('compare')">⚖️ השוואה</button>
+        <button class="tb on" onclick="switchTab('upload')">🎵 העלאה</button>
+        <button class="tb" onclick="switchTab('raw')">📝 גולמי</button>
+        <button class="tb" onclick="switchTab('clean')">✍️ נקי</button>
+        <button class="tb" onclick="switchTab('edited')">📋 ערוך</button>
+        <button class="tb" onclick="switchTab('summary')">💡 סיכום</button>
+        <button class="tb" onclick="switchTab('sources')">🔍 מקורות</button>
+        <button class="tb" onclick="switchTab('check')">⚠️ לבדיקה</button>
+        <button class="tb" onclick="switchTab('compare')">⚖️ השוואה</button>
       </div>
 
-      <!-- Tab panels -->
-      <div class="tab-panels">
-
+      <div class="panels">
         <!-- Upload -->
-        <div class="tab-panel active" id="panel-upload">
-          <div class="upload-area" id="upload-area" onclick="$('file-input').click()">
-            <div class="upload-icon">🎵</div>
-            <div class="upload-text">לחצי כאן לבחירת קובץ שיעור</div>
-            <div class="upload-sub">MP3, M4A, WAV, OGG — עד 25MB</div>
+        <div class="panel on" id="p-upload">
+          <div class="upload-area" id="upa" onclick="$('fi').click()">
+            <div class="uicon">🎵</div>
+            <div class="utext">לחצי לבחירת קובץ שיעור</div>
+            <div class="usub">MP3, M4A, WAV, OGG — כל גודל (קבצים גדולים יפוצלו אוטומטית)</div>
           </div>
-          <input type="file" id="file-input" accept=".mp3,.m4a,.wav,.ogg,.webm" onchange="handleFile(this.files[0])">
-          <div class="file-info-bar hidden" id="file-info">
+          <input type="file" id="fi" accept=".mp3,.m4a,.wav,.ogg,.webm" onchange="handleFile(this.files[0])">
+          <div class="fbar hidden" id="fbar">
             <span>🎵</span>
             <div>
-              <div style="font-size:0.82rem;font-weight:600;color:var(--brown-d)" id="file-name"></div>
-              <div style="font-size:0.72rem;color:var(--muted)" id="file-size"></div>
+              <div style="font-size:0.8rem;font-weight:600;color:var(--brown-d)" id="fn"></div>
+              <div style="font-size:0.7rem;color:var(--muted)" id="fs"></div>
             </div>
-            <span class="cost-tag" id="cost-tag"></span>
+            <span class="ctag" id="ct" style="margin-right:auto"></span>
           </div>
-          <div id="err-box" class="err-box hidden"></div>
-          <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap">
-            <button class="btn btn-gold" id="btn-transcribe" disabled onclick="startTranscription()">📖 תמללי ונקי</button>
-            <button class="btn btn-s" id="btn-export-txt" onclick="exportTxt()">💾 ייצוא TXT</button>
-            <button class="btn btn-s" id="btn-export-md" onclick="exportMd()">📄 ייצוא Markdown</button>
+          <div id="err" class="err hidden"></div>
+          <div style="display:flex;gap:0.45rem;margin-top:0.7rem;flex-wrap:wrap">
+            <button class="btn btn-g" id="btn-tr" disabled onclick="startAll()">📖 תמללי ועבדי</button>
+            <button class="btn btn-s" onclick="exportTxt()">💾 TXT</button>
+            <button class="btn btn-s" onclick="exportMd()">📄 Markdown</button>
           </div>
-          <div class="progress-section hidden" id="progress-section">
+          <div class="prog-wrap hidden" id="prog">
             <div class="steps-row">
-              <div class="step-pill" id="sp1">① תמלול</div>
-              <div class="step-pill" id="sp2">② ניקוי בסיסי</div>
-              <div class="step-pill" id="sp3">③ עריכה תורנית</div>
-              <div class="step-pill" id="sp4">④ סידור</div>
-              <div class="step-pill" id="sp5">⑤ סיכום</div>
+              <div class="sp" id="sp1">① תמלול</div>
+              <div class="sp" id="sp2">② זיהוי</div>
+              <div class="sp" id="sp3">③ ניקוי</div>
+              <div class="sp" id="sp4">④ בדיקה</div>
+              <div class="sp" id="sp5">⑤ עריכה</div>
+              <div class="sp" id="sp6">⑥ סיכום</div>
             </div>
-            <div class="prog-bar-bg"><div class="prog-bar" id="prog-bar"></div></div>
-            <div class="prog-status"><div class="spin"></div><span id="prog-msg">מכינה...</span></div>
+            <div class="pbg"><div class="pb" id="pb"></div></div>
+            <div class="pstat"><div class="spin"></div><span id="pmsg">מכינה...</span></div>
           </div>
         </div>
 
         <!-- Raw -->
-        <div class="tab-panel" id="panel-raw">
-          <div class="empty-tab" id="raw-empty"><div class="e-icon">📝</div>התמלול הגולמי יופיע כאן אחרי ההעלאה</div>
-          <div class="text-box raw hidden" id="raw-content"></div>
+        <div class="panel" id="p-raw">
+          <div class="empty-tab" id="raw-e">📝 התמלול הגולמי יופיע כאן</div>
+          <div class="tbox raw hidden" id="raw-c"></div>
         </div>
 
         <!-- Clean -->
-        <div class="tab-panel" id="panel-clean">
-          <div class="empty-tab" id="clean-empty"><div class="e-icon">✍️</div>התמלול המנוקה יופיע כאן</div>
-          <div class="text-box raw hidden" id="clean-content"></div>
+        <div class="panel" id="p-clean">
+          <div class="empty-tab" id="clean-e">✍️ התמלול המנוקה יופיע כאן</div>
+          <div class="tbox raw hidden" id="clean-c"></div>
         </div>
 
         <!-- Edited -->
-        <div class="tab-panel" id="panel-edited">
-          <div class="empty-tab" id="edited-empty"><div class="e-icon">📋</div>התמלול הערוך יופיע כאן</div>
-          <div id="edited-actions" class="hidden" style="display:flex;gap:0.5rem;margin-bottom:0.75rem;flex-wrap:wrap">
-            <button class="btn btn-s" onclick="setEditedView('sections')">📑 פסקאות</button>
-            <button class="btn btn-s" onclick="setEditedView('medium')">📄 סיכום בינוני</button>
-            <button class="btn btn-s" onclick="setEditedView('short')">⚡ סיכום קצר</button>
-            <div id="edited-loader" class="hidden" style="display:flex;align-items:center;gap:0.4rem;margin-right:0.5rem"><div class="spin"></div><span style="font-size:0.75rem;color:var(--muted)">מכין...</span></div>
+        <div class="panel" id="p-edited">
+          <div class="empty-tab" id="edited-e">📋 התמלול הערוך יופיע כאן</div>
+          <div id="edited-acts" class="view-bar hidden">
+            <span style="font-size:0.75rem;font-weight:700;color:var(--muted)">תצוגה:</span>
+            <button class="vbtn on" id="vb-sec" onclick="setView('sections')">📑 פסקאות</button>
+            <button class="vbtn" id="vb-med" onclick="setView('medium')">📄 בינוני</button>
+            <button class="vbtn" id="vb-srt" onclick="setView('short')">⚡ קצר</button>
+            <div id="vload" class="hidden" style="display:flex;align-items:center;gap:0.35rem"><div class="spin"></div><span style="font-size:0.72rem;color:var(--muted)">מכין...</span></div>
           </div>
-          <div class="text-box hidden" id="edited-content"></div>
+          <div class="tbox hidden" id="edited-c"></div>
         </div>
 
         <!-- Summary -->
-        <div class="tab-panel" id="panel-summary">
-          <div class="empty-tab" id="summary-empty"><div class="e-icon">💡</div>הסיכום יופיע כאן</div>
-          <div id="summary-content" class="hidden"></div>
+        <div class="panel" id="p-summary">
+          <div class="empty-tab" id="sum-e">💡 הסיכום יופיע כאן</div>
+          <div id="sum-c" class="hidden"></div>
         </div>
 
         <!-- Sources -->
-        <div class="tab-panel" id="panel-sources">
-          <div class="empty-tab" id="sources-empty"><div class="e-icon">🔍</div>המקורות יופיעו כאן</div>
-          <div id="sources-content" class="hidden"></div>
+        <div class="panel" id="p-sources">
+          <div class="empty-tab" id="src-e">🔍 המקורות יופיעו כאן</div>
+          <div id="src-c" class="hidden"></div>
+        </div>
+
+        <!-- Check -->
+        <div class="panel" id="p-check">
+          <div class="empty-tab" id="chk-e">⚠️ מילים לבדיקה יופיעו כאן</div>
+          <div id="chk-c" class="hidden"></div>
         </div>
 
         <!-- Compare -->
-        <div class="tab-panel" id="panel-compare">
-          <div class="empty-tab" id="compare-empty"><div class="e-icon">⚖️</div>ההשוואה תופיע לאחר תמלול</div>
-          <div class="compare-wrap hidden" id="compare-wrap">
-            <div class="compare-side">
-              <div class="compare-label">📝 תמלול גולמי</div>
-              <div class="compare-text" id="compare-raw"></div>
-            </div>
-            <div class="compare-side">
-              <div class="compare-label">✍️ תמלול מנוקה</div>
-              <div class="compare-text" id="compare-clean"></div>
-            </div>
+        <div class="panel" id="p-compare">
+          <div class="empty-tab" id="cmp-e">⚖️ ההשוואה תופיע לאחר תמלול</div>
+          <div class="cmp-wrap hidden" id="cmp-w">
+            <div class="cmp-side"><div class="cmp-lbl">📝 תמלול גולמי</div><div class="cmp-txt" id="cmp-raw"></div></div>
+            <div class="cmp-side"><div class="cmp-lbl">✍️ תמלול מנוקה</div><div class="cmp-txt" id="cmp-clean"></div></div>
           </div>
         </div>
-
       </div>
     </div>
   </main>
 </div>
 
-<!-- New Shiur Modal -->
-<div class="modal-bg hidden" id="modal-new">
+<!-- Modal -->
+<div class="modal-bg hidden" id="modal">
   <div class="modal">
-    <div class="modal-title">＋ שיעור חדש</div>
-    <div class="modal-field"><label>שם השיעור</label><input id="new-name" placeholder="לדוגמה: הרב לנג — עבירות מרוויחות"></div>
-    <div class="modal-field"><label>שם הרב</label><input id="new-rabbi" placeholder="לדוגמה: הרב מנחם לנג"></div>
-    <div class="modal-field"><label>נושא</label>
-      <select id="new-topic">
+    <div class="modal-t">＋ שיעור חדש</div>
+    <div class="mf-row"><label>שם השיעור</label><input id="n-name" placeholder="לדוגמה: הרב לנג — תמימות"></div>
+    <div class="mf-row"><label>שם הרב</label><input id="n-rabbi" placeholder="לדוגמה: הרב מנחם לנג"></div>
+    <div class="mf-row"><label>נושא</label>
+      <select id="n-topic">
         <option value="">בחרי נושא</option>
         <option>מוסר</option><option>פרשת שבוע</option><option>הלכה</option>
-        <option>אמונה</option><option>שבת</option><option>חינוך</option>
-        <option>תפילה</option><option>חגים</option><option>מדרש</option><option>גמרא</option>
+        <option>אמונה וביטחון</option><option>שבת</option><option>חינוך</option>
+        <option>תפילה</option><option>חגים</option><option>גמרא</option>
+        <option>חסידות</option><option>סיפורי צדיקים</option><option>השקפה</option>
       </select>
     </div>
-    <div class="modal-actions">
-      <button class="btn btn-gold" onclick="createShiur()">צרי שיעור</button>
+    <div class="modal-acts">
+      <button class="btn btn-g" onclick="createShiur()">צרי שיעור</button>
       <button class="btn btn-s" onclick="closeModal()">ביטול</button>
     </div>
   </div>
@@ -371,518 +340,412 @@ input[type=file]{display:none}
 
 <script>
 var $=function(id){return document.getElementById(id);};
-var sh=function(id){var el=$(id);if(el)el.classList.remove('hidden');};
-var hd=function(id){var el=$(id);if(el)el.classList.add('hidden');};
+var sh=function(id){var e=$(id);if(e)e.classList.remove('hidden');};
+var hd=function(id){var e=$(id);if(e)e.classList.add('hidden');};
 
-// ── State ──
-var DB_KEY='torah_library_v1';
-var state={
-  shiurim:[],
-  currentId:null,
-  currentFile:null,
-  editedViewCache:{}
-};
+var DB='torah_lib_v2';
+var S={shiurim:[],cur:null,file:null,vcache:{}};
 
-// ── DB (localStorage) ──
-function loadDB(){
-  try{var d=localStorage.getItem(DB_KEY);if(d)state.shiurim=JSON.parse(d);}catch(e){}
-}
-function saveDB(){
-  try{localStorage.setItem(DB_KEY,JSON.stringify(state.shiurim));}catch(e){}
-}
-function getShiur(id){return state.shiurim.find(function(s){return s.id===id;});}
-function getCurrentShiur(){return getShiur(state.currentId);}
+function loadDB(){try{var d=localStorage.getItem(DB);if(d)S.shiurim=JSON.parse(d);}catch(e){}}
+function saveDB(){try{localStorage.setItem(DB,JSON.stringify(S.shiurim));}catch(e){}}
+function getS(id){return S.shiurim.find(function(s){return s.id===id;});}
+function curS(){return getS(S.cur);}
 
-// ── API Key ──
+// API Key
 function saveKey(){
-  var k=$('apikey').value.trim();
-  if(!k)return;
-  localStorage.setItem('openai_key',k);
-  $('api-badge').textContent='מוגדר ✓';
-  $('api-badge').className='api-badge ok';
+  var k=$('apikey').value.trim();if(!k)return;
+  localStorage.setItem('oai_key',k);
+  $('apibdg').textContent='מוגדר ✓';$('apibdg').className='apibdg ok';
 }
-(function(){
-  var k=localStorage.getItem('openai_key');
-  if(k){$('apikey').value=k;$('api-badge').textContent='מוגדר ✓';$('api-badge').className='api-badge ok';}
-})();
+(function(){var k=localStorage.getItem('oai_key');if(k){$('apikey').value=k;$('apibdg').textContent='מוגדר ✓';$('apibdg').className='apibdg ok';}})();
 
-// ── Sidebar ──
-function renderSidebar(){
-  var q=($('search-box').value||'').toLowerCase();
-  var cards=$('shiur-cards');
-  cards.innerHTML='';
-  var filtered=state.shiurim.filter(function(s){
-    return !q||(s.name||'').toLowerCase().includes(q)||(s.rabbi||'').toLowerCase().includes(q);
-  });
-  if(!filtered.length){
-    cards.innerHTML='<div class="no-shiurim">אין שיעורים עדיין</div>';
-    return;
-  }
-  filtered.slice().reverse().forEach(function(s){
-    var div=document.createElement('div');
-    div.className='shiur-card'+(s.id===state.currentId?' active':'');
-    div.onclick=function(){openShiur(s.id);};
-    var statusClass={ready:'status-ready',processing:'status-processing',check:'status-check',new:''}[s.status]||'';
-    var statusText={ready:'מוכן',processing:'בתהליך',check:'צריך בדיקה',new:'חדש'}[s.status]||'חדש';
-    div.innerHTML='<div class="shiur-card-top">'+
-      '<div class="shiur-card-name">'+(s.name||'שיעור ללא שם')+'</div>'+
-      '<button class="star-btn'+(s.starred?' starred':'')+'" onclick="event.stopPropagation();toggleStarId(\''+s.id+'\')">'+(s.starred?'⭐':'☆')+'</button>'+
-      '</div>'+
-      '<div class="shiur-card-rabbi">'+(s.rabbi||'')+'</div>'+
-      '<div class="shiur-card-meta">'+
-      (statusClass?'<span class="status-badge '+statusClass+'">'+statusText+'</span>':'')+
-      (s.topic?'<span class="topic-tag">'+s.topic+'</span>':'')+
-      '<span class="shiur-date">'+(s.date||'')+'</span>'+
-      '</div>';
-    cards.appendChild(div);
+// Sidebar
+function renderSB(){
+  var q=($('sb-search').value||'').toLowerCase();
+  var el=$('sc-list');el.innerHTML='';
+  var list=S.shiurim.filter(function(s){return !q||(s.name||'').toLowerCase().includes(q)||(s.rabbi||'').toLowerCase().includes(q);});
+  if(!list.length){el.innerHTML='<div class="no-sh">אין שיעורים עדיין</div>';return;}
+  list.slice().reverse().forEach(function(s){
+    var d=document.createElement('div');
+    d.className='sc'+(s.id===S.cur?' active':'');
+    d.onclick=function(){openShiur(s.id);};
+    var sm={ready:'s-ready',processing:'s-proc',check:'s-check',new:'s-new'}[s.status||'new']||'s-new';
+    var st={ready:'מוכן',processing:'בתהליך',check:'צריך בדיקה',new:'חדש'}[s.status||'new']||'חדש';
+    d.innerHTML='<div class="sc-top"><div class="sc-name">'+(s.name||'שיעור ללא שם')+'</div>'+
+      '<button class="star-btn'+(s.starred?' on':'')+'" onclick="event.stopPropagation();starId(\''+s.id+'\')">'+(s.starred?'⭐':'☆')+'</button></div>'+
+      '<div class="sc-rabbi">'+(s.rabbi||'')+'</div>'+
+      '<div class="sc-meta"><span class="sbdg '+sm+'">'+st+'</span>'+
+      (s.topic?'<span class="ttag">'+s.topic+'</span>':'')+
+      '<span class="sc-date">'+(s.date||'')+'</span></div>';
+    el.appendChild(d);
   });
 }
 
-// ── Modal ──
-function openNewModal(){$('new-name').value='';$('new-rabbi').value='';$('new-topic').value='';sh('modal-new');setTimeout(function(){$('new-name').focus();},100);}
-function closeModal(){hd('modal-new');}
+// Modal
+function openModal(){$('n-name').value='';$('n-rabbi').value='';$('n-topic').value='';sh('modal');setTimeout(function(){$('n-name').focus();},80);}
+function closeModal(){hd('modal');}
 function createShiur(){
-  var name=$('new-name').value.trim()||'שיעור חדש';
-  var s={
-    id:'s'+Date.now(),
-    name:name,
-    rabbi:$('new-rabbi').value.trim(),
-    topic:$('new-topic').value,
-    status:'new',date:new Date().toLocaleDateString('he-IL'),
-    starred:false,
-    raw:'',clean:'',edited:'',summary:'',sources:null
-  };
-  state.shiurim.push(s);
-  saveDB();
-  closeModal();
-  renderSidebar();
-  openShiur(s.id);
+  var s={id:'s'+Date.now(),name:$('n-name').value.trim()||'שיעור חדש',rabbi:$('n-rabbi').value.trim(),topic:$('n-topic').value,status:'new',date:new Date().toLocaleDateString('he-IL'),starred:false,raw:'',clean:'',edited:'',summary:null,sources:null,uncertain:[]};
+  S.shiurim.push(s);saveDB();closeModal();renderSB();openShiur(s.id);
 }
 
-// ── Open Shiur ──
+// Open Shiur
 function openShiur(id){
-  state.currentId=id;
-  state.currentFile=null;
-  state.editedViewCache={};
-  var s=getShiur(id);
-  if(!s)return;
-  hd('empty-state');sh('shiur-view');
-  $('shiur-name').value=s.name||'';
-  $('meta-rabbi').value=s.rabbi||'';
-  $('meta-topic').value=s.topic||'';
-  $('meta-status').value=s.status||'new';
-  $('meta-date').textContent=s.date||'';
-  $('star-btn').className='star-btn'+(s.starred?' starred':'');
+  S.cur=id;S.file=null;S.vcache={};
+  var s=getS(id);if(!s)return;
+  hd('empty');sh('sv');
+  $('sv-name').value=s.name||'';
+  $('m-rabbi').value=s.rabbi||'';
+  $('m-topic').value=s.topic||'';
+  $('m-status').value=s.status||'new';
+  $('m-date').textContent=s.date||'';
+  $('star-btn').className='star-btn'+(s.starred?' on':'');
   $('star-btn').textContent=s.starred?'⭐':'☆';
   // reset upload
-  $('upload-area').querySelector('.upload-text').textContent='לחצי כאן לבחירת קובץ שיעור';
-  hd('file-info');hd('progress-section');hd('err-box');
-  $('btn-transcribe').disabled=true;
-  $('file-input').value='';
-  // show content
-  showTabContent(s);
+  $('upa').querySelector('.utext').textContent='לחצי לבחירת קובץ שיעור';
+  hd('fbar');hd('prog');hd('err');
+  $('btn-tr').disabled=true;$('fi').value='';
+  showContent(s);
   switchTab('upload');
-  renderSidebar();
+  renderSB();
 }
 
-function showTabContent(s){
+function showContent(s){
   // Raw
-  if(s.raw){hd('raw-empty');$('raw-content').textContent=s.raw;sh('raw-content');}
-  else{sh('raw-empty');hd('raw-content');}
+  if(s.raw){hd('raw-e');$('raw-c').textContent=s.raw;sh('raw-c');}else{sh('raw-e');hd('raw-c');}
   // Clean
-  if(s.clean){hd('clean-empty');$('clean-content').textContent=s.clean;sh('clean-content');}
-  else{sh('clean-empty');hd('clean-content');}
+  if(s.clean){hd('clean-e');$('clean-c').textContent=s.clean;sh('clean-c');}else{sh('clean-e');hd('clean-c');}
   // Edited
-  if(s.edited){
-    hd('edited-empty');
-    $('edited-content').innerHTML=s.edited;sh('edited-content');
-    sh('edited-actions');
-  }else{sh('edited-empty');hd('edited-content');hd('edited-actions');}
+  if(s.edited){hd('edited-e');$('edited-c').innerHTML=s.edited;sh('edited-c');sh('edited-acts');}else{sh('edited-e');hd('edited-c');hd('edited-acts');}
   // Summary
-  if(s.summary){hd('summary-empty');renderSummaryPanel(s.summary);sh('summary-content');}
-  else{sh('summary-empty');hd('summary-content');}
+  if(s.summary){hd('sum-e');renderSum(s.summary);sh('sum-c');}else{sh('sum-e');hd('sum-c');}
   // Sources
-  if(s.sources){hd('sources-empty');renderSourcesPanel(s.sources);sh('sources-content');}
-  else{sh('sources-empty');hd('sources-content');}
+  if(s.sources){hd('src-e');renderSrc(s.sources);sh('src-c');}else{sh('src-e');hd('src-c');}
+  // Check
+  if(s.uncertain&&s.uncertain.length){hd('chk-e');renderCheck(s.uncertain);sh('chk-c');}else{sh('chk-e');hd('chk-c');}
+  // Quality
+  if(s.quality){var qc={גבוה:'ql-h',בינוני:'ql-m',נמוך:'ql-l'}[s.quality]||'ql-m';$('ql-badge').innerHTML='<span class="qlty '+qc+'">איכות: '+s.quality+'</span>';}else{$('ql-badge').innerHTML='';}
   // Compare
-  if(s.raw&&s.clean){
-    hd('compare-empty');sh('compare-wrap');
-    $('compare-raw').textContent=s.raw;
-    $('compare-clean').textContent=s.clean;
-  }else{sh('compare-empty');hd('compare-wrap');}
+  if(s.raw&&s.clean){hd('cmp-e');sh('cmp-w');$('cmp-raw').textContent=s.raw;$('cmp-clean').textContent=s.clean;}else{sh('cmp-e');hd('cmp-w');}
 }
 
-// ── Meta ──
-function saveCurrentMeta(){
-  var s=getCurrentShiur();if(!s)return;
-  s.name=$('shiur-name').value;
-  s.rabbi=$('meta-rabbi').value;
-  s.topic=$('meta-topic').value;
-  s.status=$('meta-status').value;
-  saveDB();renderSidebar();
-}
-function toggleStar(){
-  var s=getCurrentShiur();if(!s)return;
-  s.starred=!s.starred;
-  $('star-btn').className='star-btn'+(s.starred?' starred':'');
-  $('star-btn').textContent=s.starred?'⭐':'☆';
-  saveDB();renderSidebar();
-}
-function toggleStarId(id){
-  var s=getShiur(id);if(!s)return;
-  s.starred=!s.starred;
-  saveDB();renderSidebar();
-  if(id===state.currentId){$('star-btn').className='star-btn'+(s.starred?' starred':'');$('star-btn').textContent=s.starred?'⭐':'☆';}
-}
-function deleteCurrentShiur(){
-  if(!confirm('למחוק את השיעור?'))return;
-  state.shiurim=state.shiurim.filter(function(s){return s.id!==state.currentId;});
-  state.currentId=null;saveDB();renderSidebar();
-  hd('shiur-view');sh('empty-state');
+function saveMeta(){var s=curS();if(!s)return;s.name=$('sv-name').value;s.rabbi=$('m-rabbi').value;s.topic=$('m-topic').value;s.status=$('m-status').value;saveDB();renderSB();}
+function toggleStar(){var s=curS();if(!s)return;s.starred=!s.starred;$('star-btn').className='star-btn'+(s.starred?' on':'');$('star-btn').textContent=s.starred?'⭐':'☆';saveDB();renderSB();}
+function starId(id){var s=getS(id);if(!s)return;s.starred=!s.starred;saveDB();renderSB();if(id===S.cur){$('star-btn').className='star-btn'+(s.starred?' on':'');$('star-btn').textContent=s.starred?'⭐':'☆';}}
+function delShiur(){if(!confirm('למחוק?'))return;S.shiurim=S.shiurim.filter(function(s){return s.id!==S.cur;});S.cur=null;saveDB();renderSB();hd('sv');sh('empty');}
+
+// Tabs
+function switchTab(n){
+  document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  var idx={upload:0,raw:1,clean:2,edited:3,summary:4,sources:5,check:6,compare:7}[n]||0;
+  document.querySelectorAll('.tb')[idx].classList.add('on');
+  $('p-'+n).classList.add('on');
 }
 
-// ── Tabs ──
-function switchTab(name){
-  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
-  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
-  var idx={upload:0,raw:1,clean:2,edited:3,summary:4,sources:5,compare:6}[name]||0;
-  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
-  $('panel-'+name).classList.add('active');
-}
-
-// ── Upload ──
-var ua=$('upload-area');
+// Upload
+var ua=$('upa');
 ua.addEventListener('dragover',function(e){e.preventDefault();ua.classList.add('over');});
 ua.addEventListener('dragleave',function(){ua.classList.remove('over');});
 ua.addEventListener('drop',function(e){e.preventDefault();ua.classList.remove('over');if(e.dataTransfer.files[0])handleFile(e.dataTransfer.files[0]);});
 
-function handleFile(file){
-  if(!file)return;
-  hd('err-box');
-  if(file.size>25*1024*1024){$('err-box').textContent='הקובץ גדול מדי — מקסימום 25MB';sh('err-box');return;}
-  state.currentFile=file;
-  $('file-name').textContent=file.name;
-  var mb=(file.size/1024/1024).toFixed(1);
-  var mins=Math.round(file.size/1024/1024*8);
-  $('file-size').textContent=mb+'MB — כ-'+mins+' דקות';
-  $('cost-tag').textContent='עלות: $'+(mins*0.006).toFixed(2);
-  sh('file-info');
-  $('btn-transcribe').disabled=false;
-  ua.querySelector('.upload-text').textContent=file.name;
+function handleFile(f){
+  if(!f)return;hd('err');
+  S.file=f;
+  $('fn').textContent=f.name;
+  var mb=(f.size/1024/1024).toFixed(1);
+  var mins=Math.round(f.size/1024/1024*8);
+  var ch=Math.ceil(f.size/(20*1024*1024));
+  $('fs').textContent=mb+'MB — כ-'+mins+' דקות'+(ch>1?' ('+ch+' חלקים)':'');
+  $('ct').textContent='עלות: $'+(mins*0.006).toFixed(2);
+  sh('fbar');$('btn-tr').disabled=false;
+  ua.querySelector('.utext').textContent=f.name;
 }
 
-// ── Progress ──
-function setProgress(pct,msg,step){
-  $('prog-bar').style.width=pct+'%';
-  $('prog-msg').textContent=msg;
-  for(var i=1;i<=5;i++){
-    var el=$('sp'+i);
-    el.classList.remove('active','done');
-    if(i===step)el.classList.add('active');
-    else if(i<step)el.classList.add('done');
-  }
+function setP(pct,msg,step){
+  $('pb').style.width=pct+'%';$('pmsg').textContent=msg;
+  for(var i=1;i<=6;i++){var e=$('sp'+i);e.classList.remove('on','done');if(i===step)e.classList.add('on');else if(i<step)e.classList.add('done');}
 }
 
-// ── GPT ──
-async function gptCall(key,system,user,max){
+// GPT call
+async function gpt(key,sys,user,max){
   max=max||4000;
   var r=await fetch('https://api.openai.com/v1/chat/completions',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
-    body:JSON.stringify({model:'gpt-4o-mini',max_tokens:max,messages:[{role:'system',content:system},{role:'user',content:user}]})
+    method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+    body:JSON.stringify({model:'gpt-4o-mini',max_tokens:max,messages:[{role:'system',content:sys},{role:'user',content:user}]})
   });
   if(!r.ok){var e=await r.json().catch(function(){return{};});throw new Error((e.error&&e.error.message)||'שגיאה '+r.status);}
-  var d=await r.json();
-  return d.choices[0].message.content.trim();
+  var d=await r.json();return d.choices[0].message.content.trim();
 }
 
-// ── Dictionary ──
-// ── מילון תיקונים מורחב לפי אשכולות ──
+function parseJ(txt){
+  var c=txt.replace(/```json|```/g,'').trim();
+  var m=c.match(/\{[\s\S]*\}/);
+  if(!m)throw new Error('JSON לא תקין');
+  return JSON.parse(m[0]);
+}
+
+// Dictionary
 var DICT={
-  // בין המצרים וחורבן
-  'בין הנצורים':'בין המצרים','בית המקדוש':'בית המקדש','ביסמקדש':'בית המקדש',
-  'בסמקדש':'בית המקדש','ביס המקדוש':'בית המקדש','המקדוש':'המקדש',
-  'חורבים':'חורבן','זכר לחורבים':'זכר לחורבן','ושכנתי בתוכו':'ושכנתי בתוכם',
-  'ירושלים ביומה':'ירושלמי ביומא','ביומה':'ביומא','פרק אף':'פרק א׳',
-  'כמגדל דויד צו אורך':'כמגדל דוד צווארך','ביס חיינו':'בית חיינו',
-  'נפשחיים':'נפש החיים','שמיר הצלושן':'שמירת הלשון','לשמיר הצלושן':'לשמירת הלשון',
-  'חבצחי':'החפץ חיים','בהקדום':'בהקדמה',
-  // חיים ומוות רוחניים
-  'מייסים':'מתים','קרואים מייסים':'קרויים מתים','קרוי מייסים':'קרוי מת',
-  'רשעים קרואים מייסים':'רשעים קרויים מתים','צדיקים קרואים חיים':'צדיקים קרויים חיים',
-  'רמה חברים':'רמ״ח איברים','רמך חברים':'רמ״ח איברים',
-  'מסגידים':'שס״ה גידים','שתי גידים':'שס״ה גידים','שם המוות':'סם המוות',
-  'מזון של נפש':'מזון הנפש',
-  // גדול המחטיאו
-  'גוגלה מכתילה ניסר מן ההורגו':'גדול המחטיאו יותר מן ההורגו',
-  'מכתילו':'מחטיאו','המכתילו':'המחטיאו','גודל המכתילה':'גדול המחטיאו',
-  'הורגו באולם הזה':'הורגו בעולם הזה','באולם הבא':'בעולם הבא',
-  'ניקמס המידיאנים':'נקמת המדיינים','מיקומו ומידיאן':'נקמת מדין',
-  'אשר ניקנו לכם על דבר טוב':'אשר נכלו לכם על דבר פעור',
-  // עיר מקלט
-  'עיר מקלות':'עיר מקלט','ליר מקלות':'לעיר מקלט','עיר מקטע':'עיר מקלט',
-  'רצח ושגג':'רוצח בשגגה','מעגלים רבו עמו':'מגלין רבו עמו',
-  'כתוב בחי':'כתוב וחי','חיי בעלי החוכמה':'חיי בעלי חכמה',
-  'כי מיטה הם חשובים':'כמיתה חשובים','מגלים את העב':'מגלין את רבו',
-  'רבו אימוש':'רבו עמו',
-  // אמונה וממון
-  'סינס חינום':'שנאת חינם','אוהבים את המומן':'אוהבים את הממון',
-  'אהבת המומן':'אהבת ממון','ממצווס לא מפסידים':'ממצוות לא מפסידים',
-  'מעברות לא מרוויחים':'מעבירות לא מרוויחים','גמילוס חסודים':'גמילות חסדים',
-  'הקבוש בורכו':'הקדוש ברוך הוא','גזיר הסליון':'גזירת עליון',
-  'תאירי ומצווס':'תורה ומצוות','רוח ניוס':'רוחניות','גשמיר':'גשמיות',
-  // הגייה אשכנזית
-  'עיסאב':'עשיו','עיסר':'עשיו','איסר':'עשיו','הייטוב':'עשיו',
-  'אבטך':'עבדך','לאזוני':'לאדוני',
-  'בצייתי ממצרים':'בצאתי ממצרים','בצעיתי ממצרים':'בצאתי ממצרים',
-  'כתבתי מכל החסדים':'קטונתי מכל החסדים','הצילי נידה':'הצילני נא',
-  'מדמידרה':'בית מדרש','קורבן פסח':'קרבן פסח','קורבן הפסח':'קרבן הפסח',
-  'גמרה':'גמרא','חזל':'חז״ל','רשי':'רש״י','רשיקו':'רש״י',
-  'רמבן':'רמב״ן','רמחל':'רמח״ל','קדוש בוך':'הקדוש ברוך הוא',
-  'כתוש ברוך הוא':'הקדוש ברוך הוא','קודוש ברוך הוא':'הקדוש ברוך הוא',
-  'ריבונו של אולם':'ריבונו של עולם','רחמון הניצלן':'רחמנא ליצלן',
-  'אלוקיים ניצול':'אלוקי נצור','מוידים':'מודים','שויגת':'שוגג',
-  'כהן הכולל הגדול':'כהן הגדול','בנקות':'בניקיונות',
-  'משום מיטייה':'משום מתיא','משום ירכיה':'משום ירקיא',
-  'ירקות ראיים לסלת':'ירקות ראויים לסעודה',
-  'חירות זאת':'חירות זו','סון':'צאן','מיטים':'מתים',
-  'רפואינו':'רפאנו','צפילה':'תפילה','לצפילה':'לתפילה',
-  'שמתפעל':'שמתפלל','שמתפלדים':'כשמתפללים',
-  'שאבעס':'שבת','שאבאס':'שבת','שאבס':'שבת',
-  'מוישה':'משה','סורה':'תורה','טוירה':'תורה','טוירע':'תורה',
-  'סשובה':'תשובה','טשובה':'תשובה',
-  'מיצווס':'מצוות','ברכעס':'ברכות','פירים':'פורים','סוכיס':'סוכות',
-  'אמעס':'אמת','מידויס':'מידות',
-  'אוי דזור':'עבודה זרה','שופח דם':'שופך דם','פיריה ורביה':'פריה ורביה',
+  'הקבוש ברוך הוא':'הקדוש ברוך הוא','כתוש ברוך הוא':'הקדוש ברוך הוא','כבוש ברוך הוא':'הקדוש ברוך הוא','קדוש בוך':'הקדוש ברוך הוא',
+  'ריבונו של אולם':'ריבונו של עולם','רבונו של אולם':'ריבונו של עולם',
+  'בית המקדוש':'בית המקדש','ביסמקדש':'בית המקדש','בסמקדש':'בית המקדש',
+  'בין הנצורים':'בין המצרים','ירושלים ביומה':'ירושלמי ביומא','ביומה':'ביומא',
+  'נפשחיים':'נפש החיים','שמיר הצלושן':'שמירת הלשון','חבצחי':'החפץ חיים',
+  'בית המקדוש':'בית המקדש','ביס חיינו':'בית חיינו','חורבים':'חורבן','זכר לחורבים':'זכר לחורבן',
+  'ושכנתי בתוכו':'ושכנתי בתוכם','כמגדל דויד צו אורך':'כמגדל דוד צווארך',
+  'רמה חברים':'רמ״ח איברים','רמך חברים':'רמ״ח איברים','מסגידים':'שס״ה גידים','שתי גידים':'שס״ה גידים',
+  'גוגלה מכתילה':'גדול המחטיאו','מעגלים רבו עמו':'מגלין רבו עמו',
+  'עיר מקלות':'עיר מקלט','עיר מקטע':'עיר מקלט','רצח ושגג':'רוצח בשגגה','שויגת':'שוגג',
+  'סינס חינום':'שנאת חינם','ממצווס לא מפסידים':'ממצוות לא מפסידים','מעברות לא מרוויחים':'מעבירות לא מרוויחים',
+  'צמימוס':'תמימות','בצמימוס':'בתמימות',
+  'חזקיה הוא המלך':'חזקיהו המלך','חזקיה הוא':'חזקיהו','מנעשה':'מנשה',
+  'נודו ואביו':'נדב ואביהוא','נודו ואביהו':'נדב ואביהוא',
+  'האגל':'העגל','פורה אדומה':'פרה אדומה','אפיקוימן':'אפיקומן',
+  'שאבעס':'שבת','שאבאס':'שבת','שביס':'שבת',
+  'מוישה':'משה','קוידש':'קודש','פירים':'פורים','סוכיס':'סוכות','אמעס':'אמת','מידויס':'מידות','ברכעס':'ברכות',
+  'גמרה':'גמרא','חזל':'חז״ל','רשיקו':'רש״י','רמבן':'רמב״ן','רמחל':'רמח״ל',
+  'רחמון הניצלן':'רחמנא ליצלן','אלוקיים ניצול':'אלוקי נצור','מוידים':'מודים','רפואינו':'רפאנו',
+  'צפילה':'תפילה','ספילה':'תפילה','שמתפעל':'שמתפלל',
+  'ביאלקוט':'בילקוט שמעוני','תוירה':'תורה','טוירה':'תורה','סורה':'תורה','תהירה':'תורה',
+  'מיצווס':'מצוות','עביירס':'עבירות','שופח דם':'שופך דם','אבוי דזור':'עבודה זרה',
   'גדולי להדור':'גדולי הדור','תלמיד חוחים':'תלמיד חכם','חוכם':'חכם',
-  'ספירה סוהימר':'ספירת העומר','בר שבע':'באר שבע',
-  'היעדן':'הירדן','שדה דום':'שדה אדום',
-  'הרב הגוין':'הרב הגאון','שליטה':'שליט״א',
-  'הרב להונג':'הרב מנחם לנג'
+  'שליטה':'שליט״א','מרקיחת וישיבת':'מרבני ישיבת'
 };
 
-function applyDict(text){
-  var t=text;
-  Object.keys(DICT).forEach(function(w){
-    if(t.indexOf(w)!==-1)t=t.split(w).join(DICT[w]);
-  });
-  return t;
-}
+function applyDict(t){Object.keys(DICT).forEach(function(w){if(t.indexOf(w)!==-1)t=t.split(w).join(DICT[w]);});return t;}
 
-var WHISPER_PROMPT='שיעור תורה של רב חרדי. עברית תורנית, לשון הקודש, יידיש, ארמית, הגייה אשכנזית.\n'+
-'מילים נפוצות: הקדוש ברוך הוא, ריבונו של עולם, עשיו, יעקב אבינו, אברהם אבינו, יצחק אבינו, משה רבנו,\n'+
-'גמרא, מסכת, שולחן ערוך, רחמנא ליצלן, חז״ל, רש״י, רמב״ן, רמב״ם, החפץ חיים, החזון איש,\n'+
-'נפש החיים, שמירת הלשון, מסילת ישרים, ילקוט שמעוני, נפש החיים,\n'+
-'קרבן פסח, בצאתי ממצרים, קטונתי מכל החסדים, הצילני נא,\n'+
-'בין המצרים, תשעה באב, חורבן בית המקדש, בית המקדש, ושכנתי בתוכם,\n'+
+// Whisper prompt
+var WP='שיעור תורה של רב חרדי. עברית תורנית, לשון הקודש, יידיש, ארמית, הגייה אשכנזית.\n'+
+'מילים נפוצות: הקדוש ברוך הוא, ריבונו של עולם, עשיו, יעקב, משה רבנו, גמרא, מסכת, שולחן ערוך,\n'+
+'רחמנא ליצלן, חז״ל, רש״י, רמב״ן, נפש החיים, שמירת הלשון, החפץ חיים, מסילת ישרים,\n'+
+'בית המקדש, חורבן, בין המצרים, ירושלמי ביומא, ושכנתי בתוכם, כמגדל דוד צווארך,\n'+
 'גדול המחטיאו יותר מן ההורגו, עיר מקלט, רוצח בשגגה, מגלין רבו עמו,\n'+
 'רמ״ח איברים ושס״ה גידים, צדיקים קרויים חיים, רשעים קרויים מתים,\n'+
-'שנאת חינם, ממצוות לא מפסידים, מעבירות לא מרוויחים,\n'+
+'שנאת חינם, ממצוות לא מפסידים, מעבירות לא מרוויחים, תמימות,\n'+
+'חזקיהו המלך, ישעיהו הנביא, מנשה, שאול המלך, שמואל הנביא, אגג, עמלק,\n'+
+'נדב ואביהוא, אש זרה, מרדכי, אסתר, הרב מבריסק, חטא העגל, פרה אדומה, אפיקומן.\n'+
 'ספירת העומר, בית מדרש, תלמיד חכם, חברה קדישא, כבוד שמים, לשם שמים, דעת תורה.';
 
-// System prompt — שני שלבים
+// System prompt — ניקוי תורני עם זיהוי אשכולות
 var CLEANUP_SYS='אתה עורך תורני מומחה לתמלול שיעורי תורה של רבנים חרדים, ישיבתיים וחסידיים.\n\n'+
-'שלב א׳ — לפני כל תיקון, קרא את כל הטקסט וזהה:\n'+
-'1. נושא השיעור ואשכול המושגים התורני\n'+
-'2. שמות רבנים וספרים שצפויים לפי הנושא\n'+
-'3. משפטים חסרי משמעות בעברית שצריכים בדיקה\n\n'+
-'שלב ב׳ — תיקון לפי הקשר:\n'+
-'- תקן ביטויים שלמים, לא רק מילים בודדות\n'+
-'- לכל משפט חסר משמעות — בדוק: האם זה ביטוי תורני מוכר לפי הנושא? פסוק? חז״ל? שם ספר? שם רב? מראה מקום? יידיש? הגייה אשכנזית?\n'+
-'- אם ברור מהקשר — תקן. אם ספק — סמן\n\n'+
-'אשכולות תיקון לפי נושא:\n'+
-'בין המצרים: בין הנצורים=בין המצרים, ירושלים ביומה=ירושלמי ביומא, נפשחיים=נפש החיים, שמיר הצלושן=שמירת הלשון, חבצחי=החפץ חיים, ביס חיינו=בית חיינו\n'+
-'חיים/מוות: רמה חברים=רמ״ח איברים, מסגידים=שס״ה גידים, מייסים=מתים, קרואים מייסים=קרויים מתים\n'+
-'גדול המחטיאו: גוגלה מכתילה ניסר=גדול המחטיאו יותר, מעגלים רבו=מגלין רבו, ניקמס המידיאנים=נקמת המדיינים\n'+
-'עיר מקלט: עיר מקלות=עיר מקלט, רצח ושגג=רוצח בשגגה, מעגלים רבו עמו=מגלין רבו עמו\n'+
-'אמונה/ממון: סינס חינום=שנאת חינם, ממצווס=ממצוות, מעברות=מעבירות\n\n'+
-'כלל ברזל: לא לנחש לפי צליל בלבד!\n'+
-'- תקן רק כשיש ביטחון גבוה מהקשר\n'+
-'- ספק: [לא ברור] / [ביטוי לא ברור] / [שם לא ברור] / [מקור לא ברור] / [פסוק לא ברור]\n'+
-'- אסור להמציא שמות רבנים, ספרים, פסוקים\n'+
-'- אסור להשאיר משפט חסר משמעות בלי טיפול\n\n'+
-'ניקוי: מחק גמגומים (אה, אממ) אבל שמור חזרות הדגשה.\n'+
-'לא לסכם, לא לקצר, לא לשנות סדר.\n'+
-'החזר רק את הטקסט המתוקן.';
+'שלב א — לפני כל תיקון, קרא את כל הטקסט וזהה:\n'+
+'1. נושא השיעור ואשכול המושגים\n'+
+'2. אם השיעור שייך לאחד מהאשכולות: תמימות/לא עושים חשבונות | רבי ישראל סלנטר | חזקיהו וישעיהו | שאול ואגג | נדב ואביהוא | מגילת אסתר | הרב מבריסק | חטא העגל ופרה אדומה | בין המצרים וחורבן | גדול המחטיאו | עיר מקלט\n'+
+'3. שמות רבנים וספרים שצפויים לפי הנושא\n'+
+'4. משפטים חסרי משמעות בעברית\n\n'+
+'שלב ב — תיקון לפי 3 רמות:\n\n'+
+'רמה 1 — ודאי (תקן תמיד):\n'+
+'הקבוש/כתוש ברוך הוא→הקדוש ברוך הוא | בית המקדוש→בית המקדש | בין הנצורים→בין המצרים\n'+
+'ירושלים ביומה→ירושלמי ביומא | נפשחיים→נפש החיים | שמיר הצלושן→שמירת הלשון\n'+
+'חבצחי→החפץ חיים | ביאלקוט→בילקוט שמעוני | ושכנתי בתוכו→ושכנתי בתוכם\n'+
+'רמה חברים→רמ״ח איברים | מסגידים→שס״ה גידים | גוגלה מכתילה→גדול המחטיאו\n'+
+'מעגלים רבו→מגלין רבו | עיר מקלות→עיר מקלט | רצח ושגג→רוצח בשגגה\n'+
+'צמימוס→תמימות | חזקיה הוא→חזקיהו | מנעשה→מנשה | נודו ואביו→נדב ואביהוא\n'+
+'האגל→העגל | פורה אדומה→פרה אדומה | שואל→שאול (רק אם מלך)\n'+
+'כתבתי מכל החסדים→קטונתי מכל החסדים | הצילי נידה→הצילני נא\n'+
+'בצייתי ממצרים→בצאתי ממצרים | שאבעס→שבת | מוישה→משה\n\n'+
+'רמה 2 — לפי הקשר (בדוק לפני שתתקן):\n'+
+'שומעים→שמים, רק ב"כבוד שמים"/"לשם שמים" | אשם→השם, רק בתפילה\n'+
+'ירושלים→ירושלמי, רק אם מקור תורני | ראשי→רש"י, רק אם פירוש\n\n'+
+'רמה 3 — לא בטוח — סמן:\n'+
+'[שם לא ברור] | [פסוק לא ברור] | [ציטוט גמרא לא ברור] | [ביטוי לא ברור] | [סיפור לא ברור]\n\n'+
+'שלב ג — טיפול במשפטים חסרי משמעות:\n'+
+'לכל משפט חסר משמעות — בדוק: האם זה ביטוי תורני לפי הנושא? פסוק? חז"ל? שם ספר? שם רב? מראה מקום? יידיש? הגייה אשכנזית?\n'+
+'אם ברור — תקן. אם לא — [ביטוי לא ברור]. אסור להשאיר משפט חסר משמעות.\n\n'+
+'כללים: לא לנחש | לא להמציא | לא לסכם | לא לקצר | לא לשנות סדר\n'+
+'נקה: אה, אממ, גמגומים — שמור: חזרות הדגשה, סיפורים, שאלות\n'+
+'החזר טקסט מתוקן בלבד.';
 
 var ORGANIZE_SYS='אתה מסדר תמלול שיעור תורה שעבר ניקוי תורני.\n\n'+
-'כללים:\n'+
-'- שמור על כל המילים — לא למחוק, לא לקצר\n'+
-'- חלק לפסקאות לפי מבנה: פתיחה/שאלה/יסוד/מקור/משל/מסקנה\n'+
-'- פתח פסקה חדשה במעבר נושא\n'+
-'- הוסף כותרות משנה רק כשיש מעבר גדול וברור\n'+
-'- הוסף פיסוק נכון\n'+
-'- שמור על סגנון שיעור בעל פה\n'+
-'- לא להוסיף תוכן חדש\n\n'+
-'דוגמאות לכותרות טובות:\n'+
-'ימי בין המצרים והאבלות על החורבן\n'+
-'בית המקדש כצוואר של כלל ישראל\n'+
-'מה נקרא חיים ומה נקרא מוות\n'+
-'רמ״ח איברים ושס״ה גידים של הנפש\n'+
-'גדול המחטיאו יותר מן ההורגו\n'+
-'עיר מקלט — חיים בלי תורה אינם חיים\n\n'+
-'החזר HTML בלבד: <p> לפסקאות, <h2> לכותרות משנה.';
+'כללים: שמור כל מילה | חלק לפסקאות | פתח פסקה חדשה במעבר עניין\n'+
+'הוסף פיסוק | כותרות משנה רק כשיש מעבר גדול וברור\n'+
+'שמור סגנון שיעור בעל פה | לא להוסיף תוכן | לא לשנות סדר\n'+
+'סמן [לא ברור] ב: <mark class="unclear">טקסט</mark>\n'+
+'החזר HTML: <h2> כותרות, <p> פסקאות.';
 
-var SUMMARY_SYS='אתה מסכם שיעורי תורה. קבל תמלול נקי והחזר JSON בלבד ללא backticks:\n'+
-'{"title":"","rabbi":"","topic":"","main_message":"","points":[""],"stories":[""],"sources":[""],"halacha":""}\n'+
-'משפטים קצרים, שפת הרב, ללא דעות אישיות. מקורות — רק מה שנאמר בבירור.';
+var SUM_SYS='אתה מסכם שיעורי תורה. קבל תמלול נקי. החזר JSON בלבד, ללא backticks, בפורמט: title, rabbi, topic_type, main_message, opening, points(מערך), stories(מערך של story+moral), sources(מערך), halacha, closing_message. שפת הרב, ללא דעות, מקורות רק מה שנאמר בבירור.';
 
-var SOURCES_SYS='אתה מזהה מקורות תורניים בשיעור. החזר JSON בלבד ללא backticks:\n'+
-'{"rabbis":["רבנים שהוזכרו"],"books":["ספרים ומסכתות"],"pesukim":["פסוקים וגמרות"],"unclear":["ביטויים שסומנו [לא ברור] מכל סוג"]}\n'+
-'רק מה שנאמר בבירור. כל סוגי [לא ברור] לרשימת unclear.';
+var SRC_SYS='אתה מזהה מקורות תורניים בשיעור. החזר JSON בלבד ללא backticks, בפורמט: rabbis_mentioned(מערך name+context), books_mentioned(מערך name+context), pesukim(מערך text+source), gemara_quotes(מערך text+source), stories_mentioned(מערך story+protagonist), unclear_marked(מערך). רק מה שנאמר בבירור.';
 
-// ── Main Transcription ──
-async function startTranscription(){
-  var key=localStorage.getItem('openai_key');
+var CHECK_SYS='אתה בודק תקינות תמלול שיעור תורה. זו רשת ביטחון אחרונה. החזר JSON בלבד ללא backticks, בפורמט: remaining_issues(מערך של text+problem+suggestion), quality_score(גבוה/בינוני/נמוך), quality_notes. בדוק: משפטים חסרי משמעות, תיקונים שגויים, מילים ישיבתיות שנשארו, חוסר עקביות.';
+
+// Chunk transcription
+var CHUNK=20*1024*1024;
+async function transcribe(key,file){
+  if(file.size<=CHUNK){
+    var fd=new FormData();fd.append('file',file);fd.append('model','whisper-1');fd.append('language','he');fd.append('response_format','text');fd.append('prompt',WP);
+    var r=await fetch('https://api.openai.com/v1/audio/transcriptions',{method:'POST',headers:{'Authorization':'Bearer '+key},body:fd});
+    if(!r.ok){var e=await r.json().catch(function(){return{};});throw new Error((e.error&&e.error.message)||'שגיאת תמלול');}
+    return await r.text();
+  }
+  var total=Math.ceil(file.size/CHUNK),parts=[];
+  for(var i=0;i<total;i++){
+    var start=i*CHUNK,end=Math.min(start+CHUNK,file.size);
+    var chunk=file.slice(start,end,file.type);
+    var ext=file.name.split('.').pop()||'mp3';
+    var cf=new File([chunk],'chunk_'+i+'.'+ext,{type:file.type||'audio/mpeg'});
+    setP(5+Math.round((i/total)*20),'מתמלל חלק '+(i+1)+' מתוך '+total+'...',1);
+    var fd2=new FormData();fd2.append('file',cf);fd2.append('model','whisper-1');fd2.append('language','he');fd2.append('response_format','text');fd2.append('prompt',WP);
+    var r2=await fetch('https://api.openai.com/v1/audio/transcriptions',{method:'POST',headers:{'Authorization':'Bearer '+key},body:fd2});
+    if(!r2.ok){var e2=await r2.json().catch(function(){return{};});throw new Error((e2.error&&e2.error.message)||'שגיאת תמלול חלק '+(i+1));}
+    parts.push((await r2.text()).trim());
+  }
+  return parts.join('\n');
+}
+
+// Main process
+async function startAll(){
+  var key=localStorage.getItem('oai_key');
   if(!key){alert('יש להזין מפתח API');return;}
-  var s=getCurrentShiur();
-  if(!s||!state.currentFile)return;
-  $('btn-transcribe').disabled=true;
-  hd('err-box');sh('progress-section');
+  var s=curS();if(!s||!S.file)return;
+  $('btn-tr').disabled=true;hd('err');sh('prog');
+  S.vcache={};
 
   try{
-    // 1. Whisper
-    setProgress(5,'מתמלל...',1);
-    var fd=new FormData();
-    fd.append('file',state.currentFile);
-    fd.append('model','whisper-1');
-    fd.append('language','he');
-    fd.append('response_format','text');
-    fd.append('prompt',WHISPER_PROMPT);
-    var wr=await fetch('https://api.openai.com/v1/audio/transcriptions',{method:'POST',headers:{'Authorization':'Bearer '+key},body:fd});
-    if(!wr.ok){var we=await wr.json().catch(function(){return{};});throw new Error((we.error&&we.error.message)||'שגיאת תמלול');}
-    s.raw=await wr.text();
-    setProgress(30,'מיישם מילון...',2);
+    // 1. תמלול
+    var ch=Math.ceil(S.file.size/CHUNK);
+    setP(5,ch>1?'מפצל ומתמלל ('+ch+' חלקים)...':'מתמלל...',1);
+    s.raw=await transcribe(key,S.file);
+    setP(30,'מיישם מילון תיקונים...',2);
 
-    // 2. Dictionary
+    // 2. מילון בסיסי
     var work=applyDict(s.raw);
-    setProgress(40,'עריכה תורנית...',3);
+    setP(38,'ניקוי תורני מקצועי...',3);
 
-    // 3. AI cleanup
-    var cleaned=await gptCall(key,CLEANUP_SYS,'תקן:\n\n'+work);
+    // 3. ניקוי AI — שני שלבים
+    var cleaned=await gpt(key,CLEANUP_SYS,'תקן לפי הכללים. זכור: [לא ברור] אם אין ודאות.\n\n'+work,4000);
     s.clean=cleaned;
-    setProgress(60,'מסדר לקריאה...',4);
+    setP(58,'בדיקת תקינות...',4);
 
-    // 4. Organize
-    var edited=await gptCall(key,ORGANIZE_SYS,'סדר בפסקאות:\n\n'+cleaned);
+    // 4. בדיקת תקינות
+    try{
+      var chkRaw=await gpt(key,CHECK_SYS,'בדוק:\n\n'+cleaned.slice(0,6000),1000);
+      var chkD=parseJ(chkRaw);
+      s.uncertain=chkD.remaining_issues||[];
+      s.quality=chkD.quality_score||'';
+      // ניקוי שני אם איכות נמוכה
+      if(s.quality==='נמוך'&&s.uncertain.length>0){
+        setP(62,'ניקוי נוסף...',4);
+        var issues=s.uncertain.map(function(u){return u.text;}).join(' | ');
+        var cl2=await gpt(key,CLEANUP_SYS+'\nטפל במיוחד ב: '+issues,'תיקון שני:\n\n'+cleaned,4000);
+        s.clean=cl2;cleaned=cl2;
+      }
+    }catch(e){s.uncertain=[];s.quality='בינוני';}
+    setP(68,'מסדר לקריאה...',5);
+
+    // 5. סידור
+    var edited=await gpt(key,ORGANIZE_SYS,'סדר:\n\n'+cleaned,4000);
     s.edited=edited.replace(/```html|```/g,'').trim();
-    setProgress(78,'מפיק סיכום...',5);
+    S.vcache.sections=s.edited;
+    setP(80,'מפיק סיכום...',6);
 
-    // 5. Summary
-    try{
-      var sumRaw=await gptCall(key,SUMMARY_SYS,'סכם:\n\n'+cleaned.slice(0,8000),1500);
-      var sumClean=sumRaw.replace(/```json|```/g,'').trim();
-      var sumM=sumClean.match(/\{[\s\S]*\}/);
-      s.summary=sumM?JSON.parse(sumM[0]):null;
-    }catch(e){s.summary=null;}
-    setProgress(90,'מזהה מקורות...',5);
+    // 6. סיכום
+    try{var sd=await gpt(key,SUM_SYS,'סכם:\n\n'+cleaned.slice(0,8000),1500);s.summary=parseJ(sd);}catch(e){s.summary=null;}
+    setP(90,'מזהה מקורות...',6);
 
-    // 6. Sources
-    try{
-      var srcRaw=await gptCall(key,SOURCES_SYS,'זהה מקורות:\n\n'+cleaned.slice(0,8000),1000);
-      var srcClean=srcRaw.replace(/```json|```/g,'').trim();
-      var srcM=srcClean.match(/\{[\s\S]*\}/);
-      s.sources=srcM?JSON.parse(srcM[0]):null;
-    }catch(e){s.sources=null;}
+    // 7. מקורות
+    try{var rd=await gpt(key,SRC_SYS,'זהה:\n\n'+cleaned.slice(0,8000),1000);s.sources=parseJ(rd);}catch(e){s.sources=null;}
 
-    s.status='ready';
-    saveDB();
-    setProgress(100,'הכל מוכן!',5);
+    s.status='ready';saveDB();
+    setP(100,'הכל מוכן!',6);
     setTimeout(function(){
-      hd('progress-section');
-      showTabContent(s);
-      renderSidebar();
-      $('btn-transcribe').disabled=false;
-      switchTab('edited');
-    },500);
+      hd('prog');showContent(s);renderSB();
+      $('btn-tr').disabled=false;switchTab('edited');
+    },450);
 
   }catch(err){
-    hd('progress-section');
-    $('err-box').textContent='שגיאה: '+err.message;
-    sh('err-box');
-    $('btn-transcribe').disabled=false;
+    hd('prog');$('err').textContent='שגיאה: '+err.message;sh('err');$('btn-tr').disabled=false;
   }
 }
 
-// ── Edited views ──
-async function setEditedView(mode){
-  var s=getCurrentShiur();if(!s||!s.clean)return;
-  if(state.editedViewCache[mode]){$('edited-content').innerHTML=state.editedViewCache[mode];return;}
-  var key=localStorage.getItem('openai_key');if(!key)return;
-  var loader=$('edited-loader');
-  loader.classList.remove('hidden');
-  $('edited-content').style.opacity='0.4';
+// View modes
+async function setView(mode){
+  var s=curS();if(!s||!s.clean)return;
+  if(S.vcache[mode]){$('edited-c').innerHTML=S.vcache[mode];return;}
+  var key=localStorage.getItem('oai_key');if(!key)return;
+  var loader=$('vload');loader.classList.remove('hidden');
+  $('edited-c').style.opacity='0.4';
+  document.querySelectorAll('.vbtn').forEach(function(b){b.classList.remove('on');});
+  $('vb-'+{sections:'sec',medium:'med',short:'srt'}[mode]).classList.add('on');
   var prompts={
     sections:ORGANIZE_SYS,
-    medium:'סכם שיעור תורה לכשליש מהאורך. כלול רעיונות מרכזיים ופסוקים. שמור שפת הרב. HTML: <h2> ו-<p>.',
+    medium:'סכם שיעור תורה לכשליש. כלול רעיונות מרכזיים ופסוקים. שמור שפת הרב. HTML: <h2> ו-<p>.',
     short:'סכם שיעור תורה ב-5-8 שורות. רעיון מרכזי ומסר. HTML: <h2> ו-<p>.'
   };
   try{
-    var res=await gptCall(key,prompts[mode],(mode==='sections'?'סדר:\n\n':'סכם:\n\n')+s.clean);
+    var res=await gpt(key,prompts[mode],(mode==='sections'?'סדר:\n\n':'סכם:\n\n')+s.clean,4000);
     var html=res.replace(/```html|```/g,'').trim();
-    state.editedViewCache[mode]=html;
-    if(mode==='sections'){s.edited=html;saveDB();}
-    $('edited-content').innerHTML=html;
-  }catch(e){
-    $('edited-content').innerHTML='<p style="color:#A32D2D">שגיאה: '+e.message+'</p>';
-  }finally{
-    loader.classList.add('hidden');
-    $('edited-content').style.opacity='1';
-  }
+    S.vcache[mode]=html;if(mode==='sections'){s.edited=html;saveDB();}
+    $('edited-c').innerHTML=html;
+  }catch(e){$('edited-c').innerHTML='<p style="color:#A32D2D">שגיאה: '+e.message+'</p>';}
+  finally{loader.classList.add('hidden');$('edited-c').style.opacity='1';}
 }
 
-// ── Render Summary ──
-function renderSummaryPanel(d){
-  var c=$('summary-content');
-  if(!d){c.innerHTML='<div class="empty-tab"><div class="e-icon">💡</div>אין סיכום</div>';return;}
+// Render Summary
+function renderSum(d){
+  var c=$('sum-c');if(!d){c.innerHTML='<div class="empty-tab">אין סיכום</div>';return;}
   var h='';
-  if(d.title)h+='<div class="summary-section"><div class="sum-h">📖 '+d.title+'</div>'+(d.rabbi?'<div class="sum-p">👤 '+d.rabbi+'</div>':'')+' </div>';
-  if(d.main_message)h+='<div class="summary-section"><div class="sum-h">💡 המסר המרכזי</div><div class="sum-p">'+d.main_message+'</div></div>';
-  if((d.points||[]).length)h+='<div class="summary-section"><div class="sum-h">📌 נקודות עיקריות</div>'+(d.points||[]).map(function(p){return '<div class="sum-point">'+p+'</div>';}).join('')+'</div>';
-  if((d.stories||[]).length)h+='<div class="summary-section"><div class="sum-h">📚 סיפורים ודוגמאות</div>'+(d.stories||[]).map(function(p){return '<div class="sum-point">'+p+'</div>';}).join('')+'</div>';
-  if((d.sources||[]).length)h+='<div class="summary-section"><div class="sum-h">🔗 מקורות</div><div>'+(d.sources||[]).map(function(s){return '<span class="source-badge">'+s+'</span>';}).join('')+'</div></div>';
-  if(d.halacha)h+='<div class="summary-section" style="background:#F0F8F0;border-right:4px solid #5A9E5A;padding:0.75rem;border-radius:0 var(--rs) var(--rs) 0"><div class="sum-h" style="color:#2A5A2A">⚖️ הלכה למעשה</div><div class="sum-p">'+d.halacha+'</div></div>';
+  if(d.title)h+='<div class="sum-sec"><div class="sum-h">📖 '+d.title+'</div>'+(d.rabbi?'<div class="sum-p">👤 '+d.rabbi+'</div>':'')+' </div>';
+  if(d.main_message)h+='<div class="sum-sec"><div class="sum-h">💡 המסר המרכזי</div><div class="sum-p">'+d.main_message+'</div></div>';
+  if(d.opening)h+='<div class="sum-sec"><div class="sum-h">פתיחה</div><div class="sum-p">'+d.opening+'</div></div>';
+  if((d.points||[]).length)h+='<div class="sum-sec"><div class="sum-h">📌 נקודות עיקריות</div>'+(d.points||[]).map(function(p){return '<div class="sum-li">'+p+'</div>';}).join('')+'</div>';
+  if((d.stories||[]).length)h+='<div class="sum-sec"><div class="sum-h">📚 סיפורים</div>'+(d.stories||[]).map(function(st){return '<div class="sum-li"><b>'+st.story+'</b>'+(st.moral?' — '+st.moral:'')+'</div>';}).join('')+'</div>';
+  if((d.sources||[]).length)h+='<div class="sum-sec"><div class="sum-h">🔗 מקורות</div><div>'+(d.sources||[]).map(function(s){return '<span class="sbdge">'+s+'</span>';}).join('')+'</div></div>';
+  if(d.halacha)h+='<div class="sum-sec" style="background:#F0F8F0;border-right:4px solid #5A9E5A;padding:0.75rem;border-radius:0 8px 8px 0"><div class="sum-h" style="color:#2A5A2A">⚖️ הלכה למעשה</div><div class="sum-p">'+d.halacha+'</div></div>';
+  if(d.closing_message)h+='<div class="sum-sec"><div class="sum-h">סיום</div><div class="sum-p">'+d.closing_message+'</div></div>';
   c.innerHTML=h||'<div class="empty-tab">אין נתונים</div>';
 }
 
-// ── Render Sources ──
-function renderSourcesPanel(d){
-  var c=$('sources-content');
-  if(!d){c.innerHTML='<div class="empty-tab"><div class="e-icon">🔍</div>אין מקורות</div>';return;}
-  var h='<div class="sources-grid">';
-  if((d.rabbis||[]).length)h+='<div class="source-group"><div class="source-group-title">👤 רבנים שהוזכרו</div>'+(d.rabbis||[]).map(function(r){return '<div class="source-item">'+r+'</div>';}).join('')+'</div>';
-  if((d.books||[]).length)h+='<div class="source-group"><div class="source-group-title">📚 ספרים ומסכתות</div>'+(d.books||[]).map(function(b){return '<div class="source-item">'+b+'</div>';}).join('')+'</div>';
-  if((d.pesukim||[]).length)h+='<div class="source-group"><div class="source-group-title">📜 פסוקים וגמרות</div>'+(d.pesukim||[]).map(function(p){return '<div class="source-item">'+p+'</div>';}).join('')+'</div>';
+// Render Sources
+function renderSrc(d){
+  var c=$('src-c');if(!d){c.innerHTML='<div class="empty-tab">אין מקורות</div>';return;}
+  var h='<div class="src-grid">';
+  if((d.rabbis_mentioned||[]).length)h+='<div class="src-grp"><div class="src-gt">👤 רבנים</div>'+(d.rabbis_mentioned||[]).map(function(r){return '<div class="src-it"><b>'+r.name+'</b> — '+r.context+'</div>';}).join('')+'</div>';
+  if((d.books_mentioned||[]).length)h+='<div class="src-grp"><div class="src-gt">📚 ספרים</div>'+(d.books_mentioned||[]).map(function(b){return '<div class="src-it"><b>'+b.name+'</b> — '+b.context+'</div>';}).join('')+'</div>';
+  if((d.pesukim||[]).length)h+='<div class="src-grp"><div class="src-gt">📜 פסוקים</div>'+(d.pesukim||[]).map(function(p){return '<div class="src-it">'+p.text+(p.source?' ('+p.source+')')+'</div>';}).join('')+'</div>';
+  if((d.gemara_quotes||[]).length)h+='<div class="src-grp"><div class="src-gt">🔖 גמרא</div>'+(d.gemara_quotes||[]).map(function(g){return '<div class="src-it">'+g.text+(g.source?' ('+g.source+')')+'</div>';}).join('')+'</div>';
+  if((d.stories_mentioned||[]).length)h+='<div class="src-grp"><div class="src-gt">📖 סיפורים</div>'+(d.stories_mentioned||[]).map(function(s){return '<div class="src-it"><b>'+s.story+'</b>'+(s.protagonist?' — '+s.protagonist:'')+'</div>';}).join('')+'</div>';
   h+='</div>';
-  if((d.unclear||[]).length){
-    h+='<div class="unclear-item"><div class="source-group-title" style="color:#7A5C00">⚠️ מילים שדורשות בדיקה</div>';
-    (d.unclear||[]).forEach(function(u){h+='<div class="source-item"><span class="unclear-mark">'+u+'</span></div>';});
+  if((d.unclear_marked||[]).length){
+    h+='<div class="unc-box"><div class="unc-t">⚠️ סומן כלא ברור — דורש בדיקה ידנית</div>';
+    (d.unclear_marked||[]).forEach(function(u){h+='<div class="unc-it"><span class="unclear">'+u+'</span></div>';});
     h+='</div>';
   }
   c.innerHTML=h;
 }
 
-// ── Export ──
+// Render Check
+function renderCheck(items){
+  var c=$('chk-c');
+  if(!items||!items.length){c.innerHTML='<div class="empty-tab">✅ לא נמצאו בעיות</div>';return;}
+  var h='<div class="unc-box"><div class="unc-t">⚠️ נמצאו '+items.length+' נקודות לבדיקה:</div>';
+  items.forEach(function(it){
+    h+='<div class="unc-it"><span class="unclear">'+it.text+'</span> — '+it.problem+(it.suggestion?' → '+it.suggestion:'')+'</div>';
+  });
+  h+='</div>';
+  c.innerHTML=h;
+}
+
+// Export
 function exportTxt(){
-  var s=getCurrentShiur();if(!s)return;
-  var txt=(s.edited?s.edited.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim():'')+(s.clean?'\n\n---תמלול נקי---\n\n'+s.clean:'')+(s.raw?'\n\n---תמלול גולמי---\n\n'+s.raw:'');
-  var blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+  var s=curS();if(!s)return;
+  var t=(s.edited?s.edited.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim():'');
+  var blob=new Blob([t+'\n\n---\n\n'+(s.clean||'')],{type:'text/plain;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(s.name||'shiur')+'.txt';a.click();
 }
 function exportMd(){
-  var s=getCurrentShiur();if(!s)return;
+  var s=curS();if(!s)return;
   var md='# '+(s.name||'שיעור תורה')+'\n\n';
   if(s.rabbi)md+='**רב:** '+s.rabbi+'\n';
   if(s.date)md+='**תאריך:** '+s.date+'\n\n';
   if(s.edited)md+='## תמלול ערוך\n\n'+s.edited.replace(/<h2>/g,'### ').replace(/<\/h2>/g,'\n').replace(/<p>/g,'').replace(/<\/p>/g,'\n\n').replace(/<[^>]+>/g,'');
-  if(s.clean)md+='\n\n## תמלול נקי\n\n'+s.clean;
   var blob=new Blob([md],{type:'text/plain;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(s.name||'shiur')+'.md';a.click();
 }
 
-// ── Init ──
-loadDB();
-renderSidebar();
+// Init
+loadDB();renderSB();
 </script>
 </body>
 </html>
