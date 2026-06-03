@@ -354,10 +354,21 @@ function curS(){return getS(S.cur);}
 // API Key
 function saveKey(){
   var k=$('apikey').value.trim();if(!k)return;
-  localStorage.setItem('oai_key',k);
+  window._oai_key=k;
+  try{localStorage.setItem('oai_key',k);}catch(e){}
+  try{sessionStorage.setItem('oai_key',k);}catch(e){}
   $('apibdg').textContent='מוגדר ✓';$('apibdg').className='apibdg ok';
 }
-(function(){var k=localStorage.getItem('oai_key');if(k){$('apikey').value=k;$('apibdg').textContent='מוגדר ✓';$('apibdg').className='apibdg ok';}})();
+function getKey(){
+  var k=window._oai_key||'';
+  if(!k){try{k=localStorage.getItem('oai_key')||'';}catch(e){}}
+  if(!k){try{k=sessionStorage.getItem('oai_key')||'';}catch(e){}}
+  return k;
+}
+(function(){
+  var k=getKey();
+  if(k){window._oai_key=k;$('apikey').value=k;$('apibdg').textContent='מוגדר ✓';$('apibdg').className='apibdg ok';}
+})();
 
 // Sidebar
 function renderSB(){
@@ -596,7 +607,7 @@ async function transcribe(key,file){
 
 // Main process
 async function startAll(){
-  var key=localStorage.getItem('oai_key');
+  var key=getKey();
   if(!key){alert('יש להזין מפתח API');return;}
   var s=curS();if(!s||!S.file)return;
   $('btn-tr').disabled=true;hd('err');sh('prog');
@@ -663,7 +674,7 @@ async function startAll(){
 async function setView(mode){
   var s=curS();if(!s||!s.clean)return;
   if(S.vcache[mode]){$('edited-c').innerHTML=S.vcache[mode];return;}
-  var key=localStorage.getItem('oai_key');if(!key)return;
+  var key=getKey();if(!key)return;
   var loader=$('vload');loader.classList.remove('hidden');
   $('edited-c').style.opacity='0.4';
   document.querySelectorAll('.vbtn').forEach(function(b){b.classList.remove('on');});
@@ -699,17 +710,50 @@ function renderSum(d){
 
 // Render Sources
 function renderSrc(d){
-  var c=$('src-c');if(!d){c.innerHTML='<div class="empty-tab">אין מקורות</div>';return;}
+  var c=$('src-c');
+  if(!d){c.innerHTML='<div class="empty-tab">אין מקורות</div>';return;}
   var h='<div class="src-grid">';
-  if((d.rabbis_mentioned||[]).length)h+='<div class="src-grp"><div class="src-gt">👤 רבנים</div>'+(d.rabbis_mentioned||[]).map(function(r){return '<div class="src-it"><b>'+r.name+'</b> — '+r.context+'</div>';}).join('')+'</div>';
-  if((d.books_mentioned||[]).length)h+='<div class="src-grp"><div class="src-gt">📚 ספרים</div>'+(d.books_mentioned||[]).map(function(b){return '<div class="src-it"><b>'+b.name+'</b> — '+b.context+'</div>';}).join('')+'</div>';
-  if((d.pesukim||[]).length)h+='<div class="src-grp"><div class="src-gt">📜 פסוקים</div>'+(d.pesukim||[]).map(function(p){return '<div class="src-it">'+p.text+(p.source?' ('+p.source+')')+'</div>';}).join('')+'</div>';
-  if((d.gemara_quotes||[]).length)h+='<div class="src-grp"><div class="src-gt">🔖 גמרא</div>'+(d.gemara_quotes||[]).map(function(g){return '<div class="src-it">'+g.text+(g.source?' ('+g.source+')')+'</div>';}).join('')+'</div>';
-  if((d.stories_mentioned||[]).length)h+='<div class="src-grp"><div class="src-gt">📖 סיפורים</div>'+(d.stories_mentioned||[]).map(function(s){return '<div class="src-it"><b>'+s.story+'</b>'+(s.protagonist?' — '+s.protagonist:'')+'</div>';}).join('')+'</div>';
+  var dq='"';
+  if((d.rabbis_mentioned||[]).length){
+    h+='<div class="src-grp"><div class="src-gt">👤 רבנים</div>';
+    (d.rabbis_mentioned||[]).forEach(function(r){h+='<div class="src-it"><b>'+r.name+'</b> — '+r.context+'</div>';});
+    h+='</div>';
+  }
+  if((d.books_mentioned||[]).length){
+    h+='<div class="src-grp"><div class="src-gt">📚 ספרים</div>';
+    (d.books_mentioned||[]).forEach(function(b){h+='<div class="src-it"><b>'+b.name+'</b> — '+b.context+'</div>';});
+    h+='</div>';
+  }
+  if((d.pesukim||[]).length){
+    h+='<div class="src-grp"><div class="src-gt">📜 פסוקים</div>';
+    (d.pesukim||[]).forEach(function(p){
+      var src=p.source ? ' ('+p.source+')' : '';
+      h+='<div class="src-it">'+p.text+src+'</div>';
+    });
+    h+='</div>';
+  }
+  if((d.gemara_quotes||[]).length){
+    h+='<div class="src-grp"><div class="src-gt">🔖 גמרא</div>';
+    (d.gemara_quotes||[]).forEach(function(g){
+      var src=g.source ? ' ('+g.source+')' : '';
+      h+='<div class="src-it">'+g.text+src+'</div>';
+    });
+    h+='</div>';
+  }
+  if((d.stories_mentioned||[]).length){
+    h+='<div class="src-grp"><div class="src-gt">📖 סיפורים</div>';
+    (d.stories_mentioned||[]).forEach(function(s){
+      var prot=s.protagonist ? ' — '+s.protagonist : '';
+      h+='<div class="src-it"><b>'+s.story+'</b>'+prot+'</div>';
+    });
+    h+='</div>';
+  }
   h+='</div>';
   if((d.unclear_marked||[]).length){
     h+='<div class="unc-box"><div class="unc-t">⚠️ סומן כלא ברור — דורש בדיקה ידנית</div>';
-    (d.unclear_marked||[]).forEach(function(u){h+='<div class="unc-it"><span class="unclear">'+u+'</span></div>';});
+    (d.unclear_marked||[]).forEach(function(u){
+      h+='<div class="unc-it"><span class="unclear">'+u+'</span></div>';
+    });
     h+='</div>';
   }
   c.innerHTML=h;
